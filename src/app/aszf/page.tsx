@@ -4,6 +4,8 @@ import NavBar from "@/components/NavBar";
 import FooterSection from "@/components/sections/FooterSection";
 import { LegalContent } from "@/components/LegalPage";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "ÁSZF — I&S Studio",
   description: "Általános Szerződési Feltételek — I&S Studio.",

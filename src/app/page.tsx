@@ -28,6 +28,8 @@ async function getData() {
   return { content, projects, services, steps, testimonials, faqs };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const { content, projects, services, steps, testimonials, faqs } = await getData();
 

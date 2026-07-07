@@ -4,6 +4,8 @@ import NavBar from "@/components/NavBar";
 import FooterSection from "@/components/sections/FooterSection";
 import { LegalContent } from "@/components/LegalPage";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Impresszum — I&S Studio",
   description: "Impresszum — I&S Studio.",

@@ -3,6 +3,9 @@ import { prisma } from "@/lib/prisma";
 
 const siteUrl = "https://illesinnovate.hu";
 
+// A projekt-URL-eket DB-ből olvassa, ezért nem prerenderelhető build közben.
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await prisma.project.findMany({
     where: { active: true },
