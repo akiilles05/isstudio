@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# DB dumps (kontakt adatok + admin hash, ne kerüljön a repóba)
+isstudio-data*.sql

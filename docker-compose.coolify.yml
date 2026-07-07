@@ -9,6 +9,10 @@ services:
       MARIADB_USER: ${DB_USER:-isstudio}
       MARIADB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD}
+    ports:
+      # Csak a szerver localhostjára kötve — kívülről nem elérhető,
+      # távoli GUI (Navicat) SSH-tunnelen keresztül csatlakozik.
+      - "127.0.0.1:3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
