@@ -1,0 +1,56 @@
+# Coolify-hoz igazított compose: nincs host port-mapping (a Coolify proxy
+# kezeli a domaint és a portot), a titkokat a Coolify env UI-ból kapja.
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-isstudio}
+      MARIADB_USER: ${DB_USER:-isstudio}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Egyszeri futás: Prisma migrációk, majd kilép.
+  migrate:
+    build:
+      context: .
+      target: builder
+    command: npx prisma migrate deploy
+    environment:
+      DATABASE_URL: mysql://${DB_USER:-isstudio}:${DB_PASSWORD}@db:3306/${DB_NAME:-isstudio}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID:-}
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      DATABASE_URL: mysql://${DB_USER:-isstudio}:${DB_PASSWORD}@db:3306/${DB_NAME:-isstudio}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      ADMIN_NOTIFY_EMAIL: ${ADMIN_NOTIFY_EMAIL:-}
+      ADMIN_NOTIFY_EMAIL_2: ${ADMIN_NOTIFY_EMAIL_2:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  db_data:

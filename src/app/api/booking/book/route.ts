@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { sendMail } from "@/lib/mail";
 import { bookingConfirmationEmail, bookingAdminNotificationEmail } from "@/lib/email-templates";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   const { id, name, email, note } = await req.json();
   if (!id || !name || !email) {

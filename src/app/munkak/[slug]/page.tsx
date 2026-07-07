@@ -6,15 +6,10 @@ import { prisma } from "@/lib/prisma";
 import NavBar from "@/components/NavBar";
 import FooterSection from "@/components/sections/FooterSection";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 async function getProject(slug: string) {
   return prisma.project.findFirst({ where: { slug, active: true } });
-}
-
-export async function generateStaticParams() {
-  const projects = await prisma.project.findMany({ where: { active: true }, select: { slug: true } });
-  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
