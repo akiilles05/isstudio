@@ -11,8 +11,8 @@ const colLabelClasses = "text-[10.5px] text-accent tracking-[0.09em] uppercase f
 export default function FooterSection({ content }: { content: ContentMap }) {
   const email = content.hero_email ?? "illes.akos@isstudio.hu";
   const desc = content.footer_desc ?? "Skálázható digitális rendszerek tervezése és fejlesztése.";
-  const linkedin = content.social_linkedin ?? "#";
-  const github = content.social_github ?? "#";
+  const linkedin = content.social_linkedin ?? "https://www.linkedin.com/company/is-studio-hu";
+  const facebook = content.social_facebook ?? "#";
   const instagram = content.social_instagram ?? "#";
 
   return (
@@ -60,8 +60,8 @@ export default function FooterSection({ content }: { content: ContentMap }) {
               <div className="flex flex-col gap-2.5">
                 {[
                   { href: linkedin, label: "LinkedIn" },
-                  { href: github, label: "GitHub" },
                   { href: instagram, label: "Instagram" },
+                  { href: facebook, label: "Facebook" },
                 ].map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className={linkClasses}>
                     {s.label}
@@ -69,28 +69,33 @@ export default function FooterSection({ content }: { content: ContentMap }) {
                 ))}
               </div>
             </div>
+            <div>
+              <p className={colLabelClasses}>Jogi</p>
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { href: "/adatvedelem", label: "Adatvédelem" },
+                  { href: "/aszf", label: "ÁSZF" },
+                  { href: "/impresszum", label: "Impresszum" },
+                ].map((l) => (
+                  <a key={l.href} href={l.href} className={linkClasses}>
+                    {l.label}
+                  </a>
+                ))}
+                <button
+                  onClick={openCookieSettings}
+                  className={`${linkClasses} cursor-pointer bg-transparent border-none p-0 text-left`}
+                >
+                  Cookie beállítások
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="flex justify-between items-center pt-6 border-t border-navy/3 flex-wrap gap-4">
-          <p className="text-xs text-muted">© 2026 I&S Studio. Minden jog fenntartva.</p>
-          <div className="flex gap-6 flex-wrap">
-            {[
-              { href: "/adatvedelem", label: "Adatvédelem" },
-              { href: "/aszf", label: "ÁSZF" },
-              { href: "/impresszum", label: "Impresszum" },
-            ].map((l) => (
-              <a key={l.href} href={l.href} className="text-xs text-muted transition-colors duration-200 hover:text-muted">
-                {l.label}
-              </a>
-            ))}
-            <button
-              onClick={openCookieSettings}
-              className="text-xs text-muted transition-colors duration-200 hover:text-muted cursor-pointer bg-transparent border-none p-0"
-            >
-              Cookie beállítások
-            </button>
-          </div>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-6 border-t border-navy/8">
+          <p className="text-xs text-muted text-center md:text-left">
+            © 2026 I&amp;S Studio. Minden jog fenntartva.
+          </p>
           <ThemeToggle />
         </div>
       </div>
