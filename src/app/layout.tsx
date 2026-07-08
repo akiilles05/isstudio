@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
-const syne = Syne({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-syne",
+const montserrat = Montserrat({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "500", "700", "800"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-dm-sans",
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const siteUrl = "https://illesinnovate.hu";
+const siteUrl = "https://isstudio.hu";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -56,7 +56,7 @@ const organizationJsonLd = {
   "@type": "ProfessionalService",
   name: "I&S Studio",
   url: siteUrl,
-  email: "kapcsolat@illesinnovate.hu",
+  email: "hello@isstudio.hu",
   telephone: "+36306487399",
   address: {
     "@type": "PostalAddress",
@@ -75,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="hu" className={`${syne.variable} ${dmSans.variable}`}>
+    <html lang="hu" className={`${montserrat.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"

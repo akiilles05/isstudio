@@ -31,11 +31,11 @@ export default function AdminLoginPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.05)",
-    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(13, 59, 102,0.08)",
+    border: "1px solid rgba(13, 59, 102,0.14)",
     borderRadius: 8,
     padding: "12px 16px",
-    color: "#d0daf5",
+    color: "var(--color-ink)",
     fontSize: 14,
     outline: "none",
   };
@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#07091c",
+        background: "#ffffff",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -55,25 +55,25 @@ export default function AdminLoginPage() {
         style={{
           width: "100%",
           maxWidth: 400,
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(13, 59, 102,0.04)",
+          border: "1px solid rgba(13, 59, 102,0.12)",
           borderRadius: 16,
           padding: 40,
         }}
       >
         <p
           style={{
-            fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+            fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
             fontSize: 20,
             fontWeight: 800,
-            color: "#eef2ff",
+            color: "var(--color-navy)",
             marginBottom: 8,
             letterSpacing: "-0.03em",
           }}
         >
-          I&S Studio<span style={{ color: "#4c7cf8" }}>.</span>
+          I&S Studio<span style={{ color: "var(--color-accent)" }}>.</span>
         </p>
-        <p style={{ fontSize: 13, color: "#5e7090", marginBottom: 32 }}>Admin belépés</p>
+        <p style={{ fontSize: 13, color: "var(--color-muted)", marginBottom: 32 }}>Admin belépés</p>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <input
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
             type="submit"
             disabled={loading}
             style={{
-              background: "#4c7cf8",
+              background: "var(--color-accent)",
               color: "#fff",
               border: "none",
               padding: "12px 24px",

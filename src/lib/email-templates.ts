@@ -1,4 +1,4 @@
-const SITE_URL = "https://illesinnovate.hu";
+const SITE_URL = "https://isstudio.hu";
 const LOGO_URL = `${SITE_URL}/logo-mark.png`;
 
 function layout(bodyHtml: string) {
@@ -28,7 +28,7 @@ function layout(bodyHtml: string) {
               <td style="padding:20px 40px;border-top:1px solid rgba(255,255,255,0.06);">
                 <p style="margin:0;font-size:12px;line-height:1.6;color:#5e7090;">
                   I&amp;S Studio &middot; Győr &amp; Budapest, Magyarország<br />
-                  <a href="mailto:kapcsolat@illesinnovate.hu" style="color:#5e7090;">kapcsolat@illesinnovate.hu</a>
+                  <a href="mailto:hello@isstudio.hu" style="color:#5e7090;">hello@isstudio.hu</a>
                 </p>
               </td>
             </tr>

@@ -9,7 +9,7 @@ const emptyProject = {
   url: "",
   domain: "",
   slug: "",
-  accentColor: "#4c7cf8",
+  accentColor: "var(--color-accent)",
   previewBg: "linear-gradient(145deg, #08122a 0%, #0d1e52 55%, #091430 100%)",
   content: "",
   results: "",
@@ -77,11 +77,11 @@ export default function AdminProjectsPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(13, 59, 102,0.03)",
+    border: "1px solid rgba(13, 59, 102,0.12)",
     borderRadius: 6,
     padding: "10px 12px",
-    color: "#d0daf5",
+    color: "var(--color-ink)",
     fontSize: 13,
     outline: "none",
   };
@@ -89,10 +89,10 @@ export default function AdminProjectsPage() {
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
-        <h1 style={{ fontFamily: "var(--font-syne,'Syne',sans-serif)", fontSize: 22, fontWeight: 800, color: "#eef2ff", letterSpacing: "-0.03em" }}>Projektek</h1>
+        <h1 style={{ fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)", fontSize: 22, fontWeight: 800, color: "var(--color-navy)", letterSpacing: "-0.03em" }}>Projektek</h1>
         <button
           onClick={openNew}
-          style={{ background: "#4c7cf8", color: "#fff", border: "none", padding: "10px 20px", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer" }}
+          style={{ background: "var(--color-accent)", color: "#fff", border: "none", padding: "10px 20px", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer" }}
         >
           + Új projekt
         </button>
@@ -101,14 +101,14 @@ export default function AdminProjectsPage() {
       {showForm && (
         <div
           style={{
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(13, 59, 102,0.04)",
+            border: "1px solid rgba(13, 59, 102,0.14)",
             borderRadius: 12,
             padding: 28,
             marginBottom: 28,
           }}
         >
-          <h2 style={{ fontFamily: "var(--font-syne,'Syne',sans-serif)", fontSize: 16, fontWeight: 700, color: "#e0e8ff", marginBottom: 20 }}>
+          <h2 style={{ fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)", fontSize: 16, fontWeight: 700, color: "var(--color-navy)", marginBottom: 20 }}>
             {editId ? "Projekt szerkesztése" : "Új projekt"}
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
@@ -122,7 +122,7 @@ export default function AdminProjectsPage() {
               { key: "order", label: "Sorrend" },
             ].map((f) => (
               <div key={f.key}>
-                <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>{f.label}</label>
+                <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>{f.label}</label>
                 <input
                   type={f.key === "order" ? "number" : "text"}
                   value={(form as Record<string, unknown>)[f.key] as string}
@@ -132,7 +132,7 @@ export default function AdminProjectsPage() {
               </div>
             ))}
             <div style={{ gridColumn: "1/-1" }}>
-              <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>
                 Kép elérési útja (pl. /projects/fonalbaba.webp, opcionális — ha üres, a gradient mockup jelenik meg)
               </label>
               <input
@@ -143,7 +143,7 @@ export default function AdminProjectsPage() {
               />
             </div>
             <div style={{ gridColumn: "1/-1" }}>
-              <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>Preview háttér (CSS gradient)</label>
+              <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>Preview háttér (CSS gradient)</label>
               <input
                 type="text"
                 value={form.previewBg}
@@ -152,7 +152,7 @@ export default function AdminProjectsPage() {
               />
             </div>
             <div style={{ gridColumn: "1/-1" }}>
-              <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>
                 Aloldal tartalom (case study szöveg, bekezdések üres sorral elválasztva)
               </label>
               <textarea
@@ -163,7 +163,7 @@ export default function AdminProjectsPage() {
               />
             </div>
             <div style={{ gridColumn: "1/-1" }}>
-              <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>
                 Eredmények (soronként &quot;Label|Érték&quot; formátumban, opcionális)
               </label>
               <textarea
@@ -174,14 +174,14 @@ export default function AdminProjectsPage() {
               />
             </div>
             <div>
-              <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>Aktív</label>
+              <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>Aktív</label>
               <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
                 <input
                   type="checkbox"
                   checked={form.active}
                   onChange={(e) => setForm((prev) => ({ ...prev, active: e.target.checked }))}
                 />
-                <span style={{ fontSize: 13, color: "#d0daf5" }}>Megjelenik az oldalon</span>
+                <span style={{ fontSize: 13, color: "var(--color-ink)" }}>Megjelenik az oldalon</span>
               </label>
             </div>
           </div>
@@ -189,13 +189,13 @@ export default function AdminProjectsPage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              style={{ background: "#4c7cf8", color: "#fff", border: "none", padding: "10px 20px", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer" }}
+              style={{ background: "var(--color-accent)", color: "#fff", border: "none", padding: "10px 20px", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer" }}
             >
               {saving ? "Mentés..." : "Mentés"}
             </button>
             <button
               onClick={() => setShowForm(false)}
-              style={{ background: "rgba(255,255,255,0.05)", color: "#5e7090", border: "none", padding: "10px 16px", borderRadius: 8, fontSize: 13, cursor: "pointer" }}
+              style={{ background: "rgba(13, 59, 102,0.08)", color: "var(--color-muted)", border: "none", padding: "10px 16px", borderRadius: 8, fontSize: 13, cursor: "pointer" }}
             >
               Mégse
             </button>
@@ -211,8 +211,8 @@ export default function AdminProjectsPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "rgba(255,255,255,0.025)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(13, 59, 102,0.03)",
+              border: "1px solid rgba(13, 59, 102,0.10)",
               borderRadius: 10,
               padding: "16px 20px",
             }}
@@ -229,11 +229,11 @@ export default function AdminProjectsPage() {
                 }}
               />
               <div>
-                <p style={{ fontSize: 14, fontWeight: 500, color: "#e0e8ff" }}>{p.title}</p>
-                <p style={{ fontSize: 12, color: "#5e7090" }}>{p.subtitle} · {p.domain}</p>
+                <p style={{ fontSize: 14, fontWeight: 500, color: "var(--color-navy)" }}>{p.title}</p>
+                <p style={{ fontSize: 12, color: "var(--color-muted)" }}>{p.subtitle} · {p.domain}</p>
               </div>
               {!p.active && (
-                <span style={{ fontSize: 10, color: "#5e7090", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 4, padding: "2px 6px" }}>
+                <span style={{ fontSize: 10, color: "var(--color-muted)", border: "1px solid rgba(13, 59, 102,0.14)", borderRadius: 4, padding: "2px 6px" }}>
                   Inaktív
                 </span>
               )}
@@ -241,7 +241,7 @@ export default function AdminProjectsPage() {
             <div style={{ display: "flex", gap: 8 }}>
               <button
                 onClick={() => openEdit(p)}
-                style={{ background: "rgba(76,124,248,0.1)", color: "#90b0ff", border: "none", padding: "6px 12px", borderRadius: 6, fontSize: 12, cursor: "pointer" }}
+                style={{ background: "rgba(46,140,178,0.1)", color: "var(--color-accent-dark)", border: "none", padding: "6px 12px", borderRadius: 6, fontSize: 12, cursor: "pointer" }}
               >
                 Szerkesztés
               </button>

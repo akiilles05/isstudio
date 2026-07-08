@@ -35,7 +35,7 @@ export default async function AdatvedelemPage() {
               list: [
                 "Név: I&S Studio (Illés Ákos egyéni vállalkozó)",
                 "Székhely: 9012 Győr, Galgóczi Erzsébet utca 20-22 E. lph 1. emelet 4. ajtó",
-                "E-mail: kapcsolat@illesinnovate.hu",
+                "E-mail: hello@isstudio.hu",
                 "Telefon: +36 30 648 7399",
                 "Adószám: 41924703-2-28",
                 "Nyilvántartási szám: 59303525",
@@ -81,7 +81,7 @@ export default async function AdatvedelemPage() {
             {
               heading: "8. Az érintettek jogai",
               paragraphs: [
-                "Az érintettek jogosultak a rájuk vonatkozó személyes adatokhoz hozzáférni, azok helyesbítését, törlését, kezelésének korlátozását kérni, adathordozhatósághoz és tiltakozáshoz való jogukkal élni. Ezen jogok a kapcsolat@illesinnovate.hu címen gyakorolhatók.",
+                "Az érintettek jogosultak a rájuk vonatkozó személyes adatokhoz hozzáférni, azok helyesbítését, törlését, kezelésének korlátozását kérni, adathordozhatósághoz és tiltakozáshoz való jogukkal élni. Ezen jogok a hello@isstudio.hu címen gyakorolhatók.",
               ],
             },
             {

@@ -42,11 +42,11 @@ export default function AdminContentPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(13, 59, 102,0.03)",
+    border: "1px solid rgba(13, 59, 102,0.12)",
     borderRadius: 6,
     padding: "10px 12px",
-    color: "#d0daf5",
+    color: "var(--color-ink)",
     fontSize: 13,
     outline: "none",
   };
@@ -55,17 +55,17 @@ export default function AdminContentPage() {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
         <div>
-          <h1 style={{ fontFamily: "var(--font-syne,'Syne',sans-serif)", fontSize: 22, fontWeight: 800, color: "#eef2ff", letterSpacing: "-0.03em" }}>
+          <h1 style={{ fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)", fontSize: 22, fontWeight: 800, color: "var(--color-navy)", letterSpacing: "-0.03em" }}>
             Tartalom szerkesztése
           </h1>
-          <p style={{ fontSize: 13, color: "#5e7090", marginTop: 4 }}>Az oldal szöveges tartalmait szerkesztheted itt.</p>
+          <p style={{ fontSize: 13, color: "var(--color-muted)", marginTop: 4 }}>Az oldal szöveges tartalmait szerkesztheted itt.</p>
         </div>
         <button
           onClick={handleSave}
           disabled={!hasChanges || saving}
           style={{
-            background: hasChanges ? "#4c7cf8" : "rgba(255,255,255,0.05)",
-            color: hasChanges ? "#fff" : "#5e7090",
+            background: hasChanges ? "var(--color-accent)" : "rgba(13, 59, 102,0.08)",
+            color: hasChanges ? "#fff" : "var(--color-muted)",
             border: "none",
             padding: "10px 20px",
             borderRadius: 8,
@@ -86,14 +86,14 @@ export default function AdminContentPage() {
           key={group}
           style={{
             marginBottom: 32,
-            background: "rgba(255,255,255,0.025)",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "rgba(13, 59, 102,0.03)",
+            border: "1px solid rgba(13, 59, 102,0.10)",
             borderRadius: 12,
             overflow: "hidden",
           }}
         >
-          <div style={{ padding: "16px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
-            <p style={{ fontSize: 11, fontWeight: 500, color: "#4c7cf8", letterSpacing: "0.1em", textTransform: "uppercase" }}>{group}</p>
+          <div style={{ padding: "16px 24px", borderBottom: "1px solid rgba(13, 59, 102,0.10)", background: "rgba(13, 59, 102,0.02)" }}>
+            <p style={{ fontSize: 11, fontWeight: 500, color: "var(--color-accent)", letterSpacing: "0.1em", textTransform: "uppercase" }}>{group}</p>
           </div>
           <div style={{ padding: "20px 24px", display: "flex", flexDirection: "column", gap: 20 }}>
             {items.filter((i) => i.group === group).map((item) => {
@@ -101,9 +101,9 @@ export default function AdminContentPage() {
               const isLong = item.value.length > 100 || item.value.includes("\n");
               return (
                 <div key={item.key}>
-                  <label style={{ fontSize: 12, color: "#6b7b9b", display: "block", marginBottom: 6 }}>
+                  <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>
                     {item.label}
-                    <span style={{ fontSize: 10, color: "#3a4e68", marginLeft: 8 }}>{item.key}</span>
+                    <span style={{ fontSize: 10, color: "var(--color-muted)", marginLeft: 8 }}>{item.key}</span>
                   </label>
                   {isLong ? (
                     <textarea
