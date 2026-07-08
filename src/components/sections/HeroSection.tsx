@@ -30,7 +30,7 @@ export default function HeroSection({ content }: { content: ContentMap }) {
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-0 right-0 h-[200px] pointer-events-none"
-        style={{ background: "linear-gradient(to top, #ffffff, transparent)" }}
+        style={{ background: "linear-gradient(to top, var(--color-bg), transparent)" }}
       />
 
       {/* Top left info */}

@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
 /* I&S Studio design tokens */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-heading: var(--font-montserrat), "Montserrat", sans-serif;
   --font-body: var(--font-inter), "Inter", sans-serif;
 
+  --color-bg: #ffffff;
   --color-navy: #0d3b66;
   --color-navy-dark: #092a4a;
   --color-accent: #2e8cb2;
@@ -22,6 +25,18 @@
   --shadow-card-lg: 0 10px 30px rgba(13, 59, 102, 0.16);
 }
 
+/* Dark theme token overrides — .dark is set on <html> */
+html.dark {
+  --color-bg: #0b1420;
+  --color-navy: #e7edf5;
+  --color-navy-dark: #060a10;
+  --color-accent: #4fb3d9;
+  --color-accent-dark: #7fcbe8;
+  --color-surface: #121b28;
+  --color-ink: #dbe2ea;
+  --color-muted: #8b97a7;
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
@@ -31,19 +46,25 @@
 
   html {
     scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
-    background: #ffffff;
-    color: #333333;
+    background: var(--color-bg);
+    color: var(--color-ink);
     font-family: var(--font-body);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    color: #0d3b66;
+    color: var(--color-navy);
   }
 
   a {
@@ -57,12 +78,12 @@
 
   ::selection {
     background: rgba(46, 140, 178, 0.3);
-    color: #0d3b66;
+    color: var(--color-navy);
   }
 
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-track { background: #ffffff; }
-  ::-webkit-scrollbar-thumb { background: #2e8cb2; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--color-accent); }
 }
 
 @keyframes ticker {

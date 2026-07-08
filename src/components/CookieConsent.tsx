@@ -63,7 +63,7 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[300] flex justify-center px-4 pb-4 sm:px-6 sm:pb-6">
-      <div className="w-full max-w-[560px] rounded-2xl border border-navy/15 bg-white/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(13,59,102,0.16)] overflow-hidden">
+      <div className="w-full max-w-[560px] rounded-2xl border border-navy/15 bg-bg/98 backdrop-blur-xl shadow-[0_20px_60px_rgba(13,59,102,0.16)] overflow-hidden">
         <div className="flex items-start gap-3 px-6 pt-6">
           <div className="w-9 h-9 rounded-full bg-accent/12 flex items-center justify-center flex-shrink-0">
             <Cookie size={18} className="text-accent" />

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { ContentMap } from "@/types";
 import { openCookieSettings } from "@/lib/cookie-consent";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const linkClasses = "text-[13px] text-muted transition-colors duration-200 hover:text-ink";
 const colLabelClasses = "text-[10.5px] text-accent tracking-[0.09em] uppercase font-medium mb-4";
@@ -20,7 +21,8 @@ export default function FooterSection({ content }: { content: ContentMap }) {
         <div className="flex justify-between items-start flex-wrap gap-12 mb-14">
           <div className="max-w-[280px]">
             <p className="flex items-center gap-2.5 font-heading text-[17px] font-extrabold tracking-[-0.03em] mb-3 text-navy">
-              <Image src="/logo-mark-navy.png" alt="" width={294} height={686} className="h-[20px] w-auto" />
+              <Image src="/logo-mark-navy.png" alt="" width={294} height={686} className="h-[20px] w-auto block dark:hidden" />
+              <Image src="/logo-mark-white.png" alt="" width={1364} height={765} className="h-[20px] w-auto hidden dark:block" />
               I&S Studio<span className="text-accent">.</span>
             </p>
             <p className="text-[13px] text-muted leading-[1.65]">{desc}</p>
@@ -89,6 +91,7 @@ export default function FooterSection({ content }: { content: ContentMap }) {
               Cookie beállítások
             </button>
           </div>
+          <ThemeToggle />
         </div>
       </div>
     </footer>

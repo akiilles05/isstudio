@@ -27,7 +27,7 @@ export default function NavBar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-[60px] py-[18px] border-b transition-[background,border-color] duration-400 ease-in-out ${
           scrolled
-            ? "bg-white/97 backdrop-blur-[20px] border-navy/10"
+            ? "bg-bg/97 backdrop-blur-[20px] border-navy/10"
             : "bg-transparent border-transparent"
         }`}
       >
@@ -35,7 +35,8 @@ export default function NavBar() {
           href="#top"
           className="flex items-center gap-2.5 font-heading text-[17px] font-extrabold tracking-[-0.03em] text-navy whitespace-nowrap"
         >
-          <Image src="/logo-mark-navy.png" alt="" width={1366} height={767} className="h-[19px] w-auto" priority />
+          <Image src="/logo-mark-navy.png" alt="" width={1366} height={767} className="h-[19px] w-auto block dark:hidden" priority />
+          <Image src="/logo-mark-white.png" alt="" width={1364} height={765} className="h-[19px] w-auto hidden dark:block" priority />
           I&amp;S Studio<span className="text-accent">.</span>
         </Link>
 
@@ -75,7 +76,7 @@ export default function NavBar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="fixed inset-0 z-[190] bg-white/98 flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 z-[190] bg-bg/98 flex flex-col items-center justify-center gap-8">
           {links.map((l) => (
             <a
               key={l.href}
