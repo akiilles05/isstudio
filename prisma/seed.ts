@@ -9,9 +9,9 @@ async function main() {
   // Admin user
   const hash = await bcrypt.hash("admin123", 12);
   await prisma.adminUser.upsert({
-    where: { email: "illes.akos@illesinnovate.hu" },
+    where: { email: "illes.akos@isstudio.hu" },
     update: {},
-    create: { email: "illes.akos@illesinnovate.hu", passwordHash: hash },
+    create: { email: "illes.akos@isstudio.hu", passwordHash: hash },
   });
 
   // Site content
@@ -19,7 +19,7 @@ async function main() {
     { key: "hero_tag", value: "Webfejlesztés · Győr & Budapest", label: "Hero tag", group: "hero" },
     { key: "hero_title", value: "Weboldal, ami\ndolgozik helyetted.", label: "Hero cím", group: "hero" },
     { key: "hero_desc", value: "Modern, eredményorientált webfejlesztés magyar KKV-knak. Ahol az üzleti cél az első, a kód utána jön.", label: "Hero leírás", group: "hero" },
-    { key: "hero_email", value: "illes.akos@illesinnovate.hu", label: "Email cím", group: "hero" },
+    { key: "hero_email", value: "illes.akos@isstudio.hu", label: "Email cím", group: "hero" },
     { key: "about_title", value: "Sziasztok, Illés Ákos vagyok.", label: "Rólam cím", group: "about" },
     { key: "about_p1", value: "5+ év tapasztalattal, pénzügyi és informatikai kettős szakértelemmel segítek vállalkozásoknak valódi üzleti eredményt elérni digitális eszközökkel.", label: "Rólam 1. bekezdés", group: "about" },
     { key: "about_p2", value: "Nem ügynökségi workflow-t kapsz — közvetlen, nyugodt partneri együttműködést. Veled egyeztetek végig, átlátható folyamattal, stabil technikai alapon.", label: "Rólam 2. bekezdés", group: "about" },

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin", "/api"],
     },
-    sitemap: "https://illesinnovate.hu/sitemap.xml",
+    sitemap: "https://isstudio.hu/sitemap.xml",
   };
 }

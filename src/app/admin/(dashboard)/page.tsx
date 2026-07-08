@@ -12,7 +12,7 @@ export default async function AdminDashboard() {
   ]);
 
   const stats = [
-    { label: "Projektek", value: projectCount, href: "/admin/projects", color: "#4c7cf8" },
+    { label: "Projektek", value: projectCount, href: "/admin/projects", color: "var(--color-accent)" },
     { label: "Szolgáltatások", value: serviceCount, href: "/admin/services", color: "#22c55e" },
     { label: "Folyamat lépések", value: stepCount, href: "/admin/process", color: "#a78bfa" },
     { label: "Üzenetek", value: msgCount, href: "/admin/messages", color: "#f59e0b", badge: unreadCount > 0 ? unreadCount : null },
@@ -22,17 +22,17 @@ export default async function AdminDashboard() {
     <div>
       <h1
         style={{
-          fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+          fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
           fontSize: 26,
           fontWeight: 800,
-          color: "#eef2ff",
+          color: "var(--color-navy)",
           letterSpacing: "-0.03em",
           marginBottom: 8,
         }}
       >
         Dashboard
       </h1>
-      <p style={{ fontSize: 14, color: "#5e7090", marginBottom: 40 }}>
+      <p style={{ fontSize: 14, color: "var(--color-muted)", marginBottom: 40 }}>
         Üdvözöllek az I&S Studio admin felületén.
       </p>
 
@@ -50,8 +50,8 @@ export default async function AdminDashboard() {
             href={s.href}
             style={{
               display: "block",
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "rgba(13, 59, 102,0.04)",
+              border: "1px solid rgba(13, 59, 102,0.10)",
               borderRadius: 12,
               padding: "24px 20px",
               textDecoration: "none",
@@ -82,7 +82,7 @@ export default async function AdminDashboard() {
             )}
             <p
               style={{
-                fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+                fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
                 fontSize: 36,
                 fontWeight: 800,
                 color: s.color,
@@ -93,25 +93,25 @@ export default async function AdminDashboard() {
             >
               {s.value}
             </p>
-            <p style={{ fontSize: 13, color: "#5e7090" }}>{s.label}</p>
+            <p style={{ fontSize: 13, color: "var(--color-muted)" }}>{s.label}</p>
           </Link>
         ))}
       </div>
 
       <div
         style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "rgba(13, 59, 102,0.04)",
+          border: "1px solid rgba(13, 59, 102,0.10)",
           borderRadius: 12,
           padding: "24px 28px",
         }}
       >
         <h2
           style={{
-            fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+            fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
             fontSize: 16,
             fontWeight: 700,
-            color: "#e0e8ff",
+            color: "var(--color-navy)",
             marginBottom: 16,
           }}
         >
@@ -128,11 +128,11 @@ export default async function AdminDashboard() {
               href={l.href}
               style={{
                 padding: "8px 16px",
-                background: "rgba(76,124,248,0.08)",
-                border: "1px solid rgba(76,124,248,0.2)",
+                background: "rgba(46,140,178,0.08)",
+                border: "1px solid rgba(46,140,178,0.2)",
                 borderRadius: 7,
                 fontSize: 13,
-                color: "#90b0ff",
+                color: "var(--color-accent-dark)",
                 textDecoration: "none",
                 display: "inline-flex",
                 alignItems: "center",

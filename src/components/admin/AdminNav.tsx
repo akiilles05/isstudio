@@ -42,8 +42,8 @@ export default function AdminNav() {
     <aside
       style={{
         width: 220,
-        background: "rgba(255,255,255,0.025)",
-        borderRight: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(13, 59, 102,0.03)",
+        borderRight: "1px solid rgba(13, 59, 102,0.10)",
         display: "flex",
         flexDirection: "column",
         padding: "24px 0",
@@ -53,16 +53,16 @@ export default function AdminNav() {
       <div style={{ padding: "0 20px 28px" }}>
         <p
           style={{
-            fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+            fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
             fontSize: 15,
             fontWeight: 800,
-            color: "#eef2ff",
+            color: "var(--color-navy)",
             letterSpacing: "-0.03em",
           }}
         >
-          I&S Studio<span style={{ color: "#4c7cf8" }}>.</span>
+          I&S Studio<span style={{ color: "var(--color-accent)" }}>.</span>
         </p>
-        <p style={{ fontSize: 11, color: "#5e7090", marginTop: 3 }}>CMS Admin</p>
+        <p style={{ fontSize: 11, color: "var(--color-muted)", marginTop: 3 }}>CMS Admin</p>
       </div>
 
       <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: 2, padding: "0 12px" }}>
@@ -81,9 +81,9 @@ export default function AdminNav() {
                 borderRadius: 7,
                 fontSize: 13.5,
                 fontWeight: active ? 500 : 400,
-                color: active ? "#eef2ff" : "#5e7090",
-                background: active ? "rgba(76,124,248,0.12)" : "transparent",
-                border: active ? "1px solid rgba(76,124,248,0.2)" : "1px solid transparent",
+                color: active ? "var(--color-navy)" : "var(--color-muted)",
+                background: active ? "rgba(46,140,178,0.12)" : "transparent",
+                border: active ? "1px solid rgba(46,140,178,0.2)" : "1px solid transparent",
                 transition: "all 0.15s ease",
                 textDecoration: "none",
               }}
@@ -105,7 +105,7 @@ export default function AdminNav() {
             padding: "9px 12px",
             borderRadius: 7,
             fontSize: 13.5,
-            color: "#5e7090",
+            color: "var(--color-muted)",
             textDecoration: "none",
             marginBottom: 4,
           }}
@@ -122,7 +122,7 @@ export default function AdminNav() {
             padding: "9px 12px",
             borderRadius: 7,
             fontSize: 13.5,
-            color: "#5e7090",
+            color: "var(--color-muted)",
             background: "none",
             border: "none",
             cursor: "pointer",

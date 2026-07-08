@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 
-const siteUrl = "https://illesinnovate.hu";
+const siteUrl = "https://isstudio.hu";
 
 // A projekt-URL-eket DB-ből olvassa, ezért nem prerenderelhető build közben.
 export const dynamic = "force-dynamic";

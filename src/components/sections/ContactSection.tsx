@@ -5,14 +5,14 @@ import { ArrowRight, Check } from "lucide-react";
 import type { ContentMap } from "@/types";
 
 const inputClasses =
-  "w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-lg px-4 py-3.5 text-[#d0daf5] text-sm outline-none transition-[border-color,background] duration-200 focus:border-[rgba(76,124,248,0.5)] focus:bg-[rgba(76,124,248,0.04)]";
+  "w-full bg-navy/3 border border-navy/12 rounded-lg px-4 py-3.5 text-ink text-sm outline-none transition-[border-color,background] duration-200 focus:border-accent/50 focus:bg-accent/4";
 
 export default function ContactSection({ content }: { content: ContentMap }) {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const email = content.hero_email ?? "illes.akos@illesinnovate.hu";
+  const email = content.hero_email ?? "illes.akos@isstudio.hu";
   const title = content.contact_title ?? "Kezdjük el a projekted.";
   const desc = content.contact_desc ?? "Mesélj a vállalkozásodról.";
   const info = content.contact_info ?? "";
@@ -50,11 +50,11 @@ export default function ContactSection({ content }: { content: ContentMap }) {
     <section id="kapcsolat" className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,6vw,80px)]">
       <div className="max-w-[1280px] mx-auto">
         <div className="mb-[72px]">
-          <p className="text-[11px] font-medium text-[#4c7cf8] tracking-[0.1em] uppercase mb-4">Kapcsolat</p>
-          <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-[#eef2ff] leading-[1.05] max-w-[680px]">
+          <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Kapcsolat</p>
+          <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05] max-w-[680px]">
             {title}
           </h2>
-          <p className="text-[15px] text-[#6b7b9b] max-w-[460px] leading-[1.72] mt-4">{desc}</p>
+          <p className="text-[15px] text-muted max-w-[460px] leading-[1.72] mt-4">{desc}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
@@ -63,14 +63,14 @@ export default function ContactSection({ content }: { content: ContentMap }) {
             <div>
               <a
                 href={`mailto:${email}`}
-                className="font-heading text-[clamp(1.1rem,2.2vw,1.7rem)] font-bold text-[#c0ccea] tracking-[-0.025em] transition-colors duration-200 inline-flex items-center gap-2.5 hover:text-[#4c7cf8]"
+                className="font-heading text-[clamp(1.1rem,2.2vw,1.7rem)] font-bold text-ink tracking-[-0.025em] transition-colors duration-200 inline-flex items-center gap-2.5 hover:text-accent"
               >
-                {email} <ArrowRight size={18} className="text-[#4c7cf8]" />
+                {email} <ArrowRight size={18} className="text-accent" />
               </a>
-              <p className="text-[13px] text-[#5e7090] mt-2.5">Győr &amp; Budapest, Magyarország</p>
+              <p className="text-[13px] text-muted mt-2.5">Győr &amp; Budapest, Magyarország</p>
             </div>
             <div className="flex flex-col gap-3">
-              <p className="text-[11px] font-medium text-[#4c7cf8] tracking-[0.1em] uppercase">Social</p>
+              <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase">Social</p>
               <div className="flex gap-6 flex-wrap">
                 {[
                   { href: linkedin, label: "LinkedIn" },
@@ -82,7 +82,7 @@ export default function ContactSection({ content }: { content: ContentMap }) {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13px] text-[#5e7090] transition-colors duration-200 hover:text-[#d0daf5]"
+                    className="text-[13px] text-muted transition-colors duration-200 hover:text-ink"
                   >
                     {s.label}
                   </a>
@@ -90,8 +90,8 @@ export default function ContactSection({ content }: { content: ContentMap }) {
               </div>
             </div>
             {info && (
-              <div className="px-6 py-[22px] bg-[rgba(76,124,248,0.05)] border border-[rgba(76,124,248,0.14)] rounded-xl">
-                <p className="text-[13px] text-[#6b7b9b] leading-[1.72]">{info}</p>
+              <div className="px-6 py-[22px] bg-accent/5 border border-accent/15 rounded-xl">
+                <p className="text-[13px] text-muted leading-[1.72]">{info}</p>
               </div>
             )}
           </div>
@@ -115,7 +115,7 @@ export default function ContactSection({ content }: { content: ContentMap }) {
                   type="submit"
                   disabled={loading}
                   className={`text-white border-none px-7 py-3.5 rounded-lg text-sm font-medium self-start flex items-center gap-2 transition-colors duration-200 ${
-                    loading ? "bg-[#3a5fd4] cursor-not-allowed" : "bg-[#4c7cf8] cursor-pointer"
+                    loading ? "bg-accent-dark cursor-not-allowed" : "bg-accent cursor-pointer"
                   }`}
                 >
                   {loading ? (
@@ -133,10 +133,10 @@ export default function ContactSection({ content }: { content: ContentMap }) {
                   <Check size={22} className="text-[#22c55e]" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-[21px] font-bold text-[#e8eeff] tracking-[-0.02em] mb-2">
+                  <h3 className="font-heading text-[21px] font-bold text-navy tracking-[-0.02em] mb-2">
                     Köszönjük! Hamarosan jelentkezünk.
                   </h3>
-                  <p className="text-sm text-[#6b7b9b] leading-[1.7]">Általában 24 órán belül válaszolunk.</p>
+                  <p className="text-sm text-muted leading-[1.7]">Általában 24 órán belül válaszolunk.</p>
                 </div>
               </div>
             )}

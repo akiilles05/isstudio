@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'illesinnovate.hu',
+        hostname: 'isstudio.hu',
         port: '',
         pathname: '/**',
       },

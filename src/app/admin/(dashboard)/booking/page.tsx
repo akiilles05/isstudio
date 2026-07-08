@@ -97,11 +97,11 @@ export default function AdminBookingPage() {
   }
 
   const inputStyle: React.CSSProperties = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.08)",
+    background: "rgba(13, 59, 102,0.03)",
+    border: "1px solid rgba(13, 59, 102,0.12)",
     borderRadius: 6,
     padding: "10px 12px",
-    color: "#d0daf5",
+    color: "var(--color-ink)",
     fontSize: 13,
     outline: "none",
   };
@@ -120,33 +120,33 @@ export default function AdminBookingPage() {
   return (
     <div>
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontFamily: "var(--font-syne,'Syne',sans-serif)", fontSize: 22, fontWeight: 800, color: "#eef2ff", letterSpacing: "-0.03em" }}>
+        <h1 style={{ fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)", fontSize: 22, fontWeight: 800, color: "var(--color-navy)", letterSpacing: "-0.03em" }}>
           Foglalás
         </h1>
-        <p style={{ fontSize: 13, color: "#5e7090", marginTop: 4 }}>
+        <p style={{ fontSize: 13, color: "var(--color-muted)", marginTop: 4 }}>
           Válassz egy napot a naptárban, és nyiss meg rá időpontokat, amikre a látogatók foglalhatnak.
         </p>
       </div>
 
-      <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 320px" }}>
+      <div style={{ background: "rgba(13, 59, 102,0.02)", border: "1px solid rgba(13, 59, 102,0.12)", borderRadius: 12, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 320px" }}>
         {/* Calendar */}
-        <div style={{ padding: 24, borderRight: "1px solid rgba(255,255,255,0.07)" }}>
+        <div style={{ padding: 24, borderRight: "1px solid rgba(13, 59, 102,0.10)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "#e0e8ff" }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "var(--color-navy)" }}>
               {monthCursor.toLocaleDateString("hu-HU", { month: "long", year: "numeric" })}
             </p>
             <div style={{ display: "flex", gap: 4 }}>
               <button
                 onClick={() => changeMonth(-1)}
                 aria-label="Előző hónap"
-                style={{ width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#7080a8", background: "transparent", border: "none", cursor: "pointer" }}
+                style={{ width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-muted)", background: "transparent", border: "none", cursor: "pointer" }}
               >
                 <ChevronLeft size={15} />
               </button>
               <button
                 onClick={() => changeMonth(1)}
                 aria-label="Következő hónap"
-                style={{ width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#7080a8", background: "transparent", border: "none", cursor: "pointer" }}
+                style={{ width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-muted)", background: "transparent", border: "none", cursor: "pointer" }}
               >
                 <ChevronRight size={15} />
               </button>
@@ -155,7 +155,7 @@ export default function AdminBookingPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, marginBottom: 6 }}>
             {WEEKDAYS.map((w) => (
-              <div key={w} style={{ textAlign: "center", fontSize: 10.5, color: "#5e7090", fontWeight: 500, padding: "4px 0" }}>
+              <div key={w} style={{ textAlign: "center", fontSize: 10.5, color: "var(--color-muted)", fontWeight: 500, padding: "4px 0" }}>
                 {w}
               </div>
             ))}
@@ -185,16 +185,16 @@ export default function AdminBookingPage() {
                     justifyContent: "center",
                     gap: 2,
                     cursor: "pointer",
-                    border: isSelected ? "1px solid #4c7cf8" : "1px solid transparent",
-                    background: isSelected ? "rgba(76,124,248,0.15)" : "transparent",
-                    color: isPast ? "#3a4e68" : isSelected ? "#eef2ff" : "#c0ccea",
+                    border: isSelected ? "1px solid var(--color-accent)" : "1px solid transparent",
+                    background: isSelected ? "rgba(46,140,178,0.15)" : "transparent",
+                    color: isPast ? "var(--color-muted)" : isSelected ? "var(--color-navy)" : "var(--color-ink)",
                     opacity: isPast ? 0.5 : 1,
                   }}
                 >
                   <span style={{ fontWeight: isSelected ? 600 : 400 }}>{d.getDate()}</span>
                   {(openCount > 0 || bookedCount > 0) && (
                     <span style={{ display: "flex", gap: 2 }}>
-                      {openCount > 0 && <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#4c7cf8", display: "block" }} />}
+                      {openCount > 0 && <span style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--color-accent)", display: "block" }} />}
                       {bookedCount > 0 && <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#22c55e", display: "block" }} />}
                     </span>
                   )}
@@ -206,12 +206,12 @@ export default function AdminBookingPage() {
 
         {/* Selected day panel */}
         <div style={{ padding: 24, display: "flex", flexDirection: "column" }}>
-          <p style={{ fontSize: 14, fontWeight: 600, color: "#e0e8ff", marginBottom: 16 }}>
+          <p style={{ fontSize: 14, fontWeight: 600, color: "var(--color-navy)", marginBottom: 16 }}>
             {selectedDate.toLocaleDateString("hu-HU", { weekday: "long", month: "long", day: "numeric" })}
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20, flex: 1, overflowY: "auto" }}>
-            {daySlots.length === 0 && <p style={{ fontSize: 13, color: "#5e7090" }}>Nincs időpont ezen a napon.</p>}
+            {daySlots.length === 0 && <p style={{ fontSize: 13, color: "var(--color-muted)" }}>Nincs időpont ezen a napon.</p>}
             {daySlots.map((s) => (
               <div
                 key={s.id}
@@ -219,14 +219,14 @@ export default function AdminBookingPage() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  background: "rgba(13, 59, 102,0.04)",
+                  border: "1px solid rgba(13, 59, 102,0.10)",
                   borderRadius: 8,
                   padding: "10px 12px",
                 }}
               >
                 <div>
-                  <p style={{ fontSize: 13, fontWeight: 500, color: "#e0e8ff" }}>
+                  <p style={{ fontSize: 13, fontWeight: 500, color: "var(--color-navy)" }}>
                     {formatTime(s.date)} · {s.duration} perc
                   </p>
                   {s.booked ? (
@@ -234,7 +234,7 @@ export default function AdminBookingPage() {
                       Foglalt — {s.name} ({s.email}){s.note ? ` · ${s.note}` : ""}
                     </p>
                   ) : (
-                    <p style={{ fontSize: 11.5, color: "#5e7090", marginTop: 2 }}>Szabad</p>
+                    <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginTop: 2 }}>Szabad</p>
                   )}
                 </div>
                 {!s.booked && (
@@ -250,8 +250,8 @@ export default function AdminBookingPage() {
             ))}
           </div>
 
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 16 }}>
-            <p style={{ fontSize: 12, color: "#6b7b9b", marginBottom: 10 }}>Új időpont erre a napra</p>
+          <div style={{ borderTop: "1px solid rgba(13, 59, 102,0.10)", paddingTop: 16 }}>
+            <p style={{ fontSize: 12, color: "var(--color-muted)", marginBottom: 10 }}>Új időpont erre a napra</p>
             <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
               <input type="time" value={time} onChange={(e) => setTime(e.target.value)} style={{ ...inputStyle, flex: 1 }} />
               <input type="number" value={duration} onChange={(e) => setDuration(Number(e.target.value))} style={{ ...inputStyle, width: 64 }} />
@@ -261,7 +261,7 @@ export default function AdminBookingPage() {
               disabled={saving || !time}
               style={{
                 width: "100%",
-                background: "#4c7cf8",
+                background: "var(--color-accent)",
                 color: "#fff",
                 border: "none",
                 padding: "10px 16px",

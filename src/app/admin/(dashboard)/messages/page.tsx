@@ -30,7 +30,7 @@ export default function AdminMessagesPage() {
   return (
     <div>
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontFamily: "var(--font-syne,'Syne',sans-serif)", fontSize: 22, fontWeight: 800, color: "#eef2ff", letterSpacing: "-0.03em" }}>
+        <h1 style={{ fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)", fontSize: 22, fontWeight: 800, color: "var(--color-navy)", letterSpacing: "-0.03em" }}>
           Üzenetek
           {unread > 0 && (
             <span style={{ marginLeft: 10, background: "#f59e0b", color: "#000", fontSize: 12, fontWeight: 700, borderRadius: 12, padding: "2px 8px" }}>
@@ -41,12 +41,12 @@ export default function AdminMessagesPage() {
       </div>
 
       {messages.length === 0 && (
-        <p style={{ fontSize: 14, color: "#5e7090" }}>Még nincsenek üzenetek.</p>
+        <p style={{ fontSize: 14, color: "var(--color-muted)" }}>Még nincsenek üzenetek.</p>
       )}
 
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {messages.map((m) => (
-          <div key={m.id} style={{ background: "rgba(255,255,255,0.025)", border: m.read ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(245,158,11,0.25)", borderRadius: 10, overflow: "hidden" }}>
+          <div key={m.id} style={{ background: "rgba(13, 59, 102,0.03)", border: m.read ? "1px solid rgba(13, 59, 102,0.10)" : "1px solid rgba(245,158,11,0.25)", borderRadius: 10, overflow: "hidden" }}>
             <div
               style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 20px", cursor: "pointer" }}
               onClick={() => setOpen(open === m.id ? null : m.id)}
@@ -54,29 +54,29 @@ export default function AdminMessagesPage() {
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 {!m.read && <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#f59e0b", display: "block", flexShrink: 0 }} />}
                 <div>
-                  <p style={{ fontSize: 14, fontWeight: 500, color: m.read ? "#6b7b9b" : "#e0e8ff" }}>{m.name}</p>
-                  <p style={{ fontSize: 12, color: "#5e7090" }}>{m.email}{m.company ? ` · ${m.company}` : ""}</p>
+                  <p style={{ fontSize: 14, fontWeight: 500, color: m.read ? "var(--color-muted)" : "var(--color-navy)" }}>{m.name}</p>
+                  <p style={{ fontSize: 12, color: "var(--color-muted)" }}>{m.email}{m.company ? ` · ${m.company}` : ""}</p>
                 </div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <span style={{ fontSize: 11, color: "#5e7090" }}>{new Date(m.createdAt).toLocaleDateString("hu-HU")}</span>
+                <span style={{ fontSize: 11, color: "var(--color-muted)" }}>{new Date(m.createdAt).toLocaleDateString("hu-HU")}</span>
                 {open === m.id ? (
-                  <ChevronUp size={15} strokeWidth={2} color="#5e7090" />
+                  <ChevronUp size={15} strokeWidth={2} color="var(--color-muted)" />
                 ) : (
-                  <ChevronDown size={15} strokeWidth={2} color="#5e7090" />
+                  <ChevronDown size={15} strokeWidth={2} color="var(--color-muted)" />
                 )}
               </div>
             </div>
 
             {open === m.id && (
-              <div style={{ padding: "0 20px 20px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                <p style={{ fontSize: 14, color: "#d0daf5", lineHeight: 1.7, paddingTop: 16, whiteSpace: "pre-wrap" }}>{m.message}</p>
+              <div style={{ padding: "0 20px 20px", borderTop: "1px solid rgba(13, 59, 102,0.08)" }}>
+                <p style={{ fontSize: 14, color: "var(--color-ink)", lineHeight: 1.7, paddingTop: 16, whiteSpace: "pre-wrap" }}>{m.message}</p>
                 <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
                   <a
                     href={`mailto:${m.email}`}
                     style={{
-                      background: "rgba(76,124,248,0.1)",
-                      color: "#90b0ff",
+                      background: "rgba(46,140,178,0.1)",
+                      color: "var(--color-accent-dark)",
                       border: "none",
                       padding: "6px 12px",
                       borderRadius: 6,
@@ -91,7 +91,7 @@ export default function AdminMessagesPage() {
                   </a>
                   <button
                     onClick={() => markRead(m.id, !m.read)}
-                    style={{ background: "rgba(255,255,255,0.05)", color: "#5e7090", border: "none", padding: "6px 12px", borderRadius: 6, fontSize: 12, cursor: "pointer" }}
+                    style={{ background: "rgba(13, 59, 102,0.08)", color: "var(--color-muted)", border: "none", padding: "6px 12px", borderRadius: 6, fontSize: 12, cursor: "pointer" }}
                   >
                     {m.read ? "Olvasatlannak jelöl" : "Olvasottnak jelöl"}
                   </button>

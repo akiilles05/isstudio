@@ -7,7 +7,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!session) redirect("/admin/login");
 
   return (
-    <div style={{ minHeight: "100vh", background: "#07091c", display: "flex" }}>
+    <div style={{ minHeight: "100vh", background: "#ffffff", display: "flex" }}>
       <AdminNav />
       <main
         style={{
