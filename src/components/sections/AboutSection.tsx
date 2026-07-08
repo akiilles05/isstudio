@@ -43,8 +43,8 @@ export default function AboutSection({ content }: { content: ContentMap }) {
                 style={{ background: "linear-gradient(to top, rgba(from var(--color-navy-dark) r g b / 0.65) 0%, transparent 50%)" }}
               />
               <div className="absolute bottom-3 left-3 right-3 bg-navy-dark/78 border border-navy/15 rounded-[10px] px-3 py-2.5 backdrop-blur-md">
-                <p className="font-heading text-xs font-bold dark:text-white text-navy tracking-[-0.01em]">Illés Ákos</p>
-                <p className="text-[10px] text-muted mt-[3px] dark:text-white">Alapító &amp; fejlesztő</p>
+                <p className="font-heading text-xs font-bold text-white tracking-[-0.01em]">Illés Ákos</p>
+                <p className="text-[10px] text-white mt-[3px]">Alapító &amp; fejlesztő</p>
               </div>
             </div>
             <div
@@ -63,8 +63,8 @@ export default function AboutSection({ content }: { content: ContentMap }) {
                 style={{ background: "linear-gradient(to top, rgba(from var(--color-navy-dark) r g b / 0.65) 0%, transparent 50%)" }}
               />
               <div className="absolute bottom-3 left-3 right-3 bg-navy-dark/78 border border-navy/15 rounded-[10px] px-3 py-2.5 backdrop-blur-md">
-                <p className="font-heading text-xs font-bold dark:text-white text-navy tracking-[-0.01em]">Stecenkó Nándor</p>
-                <p className="text-[10px] text-muted mt-[3px] dark:text-white">Alapító &amp; fejlesztő</p>
+                <p className="font-heading text-xs font-bold text-white tracking-[-0.01em]">Stecenkó Nándor</p>
+                <p className="text-[10px]  mt-[3px] text-white">Alapító &amp; fejlesztő</p>
               </div>
             </div>
           </div>
