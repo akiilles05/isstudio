@@ -36,6 +36,7 @@ async function main() {
     { key: "social_linkedin", value: "https://linkedin.com/company/illes-innovate", label: "LinkedIn URL", group: "social" },
     { key: "social_github", value: "https://github.com/Illes-Innovate", label: "GitHub URL", group: "social" },
     { key: "social_instagram", value: "https://instagram.com/illesinnovate", label: "Instagram URL", group: "social" },
+    { key: "social_facebook", value: "#", label: "Facebook URL", group: "social" },
     { key: "booking_title", value: "Foglalj egy ingyenes konzultációt.", label: "Foglalás cím", group: "booking" },
     { key: "booking_desc", value: "30 perc, kötelezettség nélkül — átbeszéljük az ötleted és a lehetséges megoldást.", label: "Foglalás leírás", group: "booking" },
   ];
