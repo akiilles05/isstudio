@@ -12,13 +12,14 @@ export default function ContactSection({ content }: { content: ContentMap }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const email = content.hero_email ?? "illes.akos@isstudio.hu";
+  const email = content.hero_email ?? "hello@isstudio.hu";
   const title = content.contact_title ?? "Kezdjük el a projekted.";
   const desc = content.contact_desc ?? "Mesélj a vállalkozásodról.";
   const info = content.contact_info ?? "";
-  const linkedin = content.social_linkedin ?? "#";
-  const github = content.social_github ?? "#";
-  const instagram = content.social_instagram ?? "#";
+  const linkedin = content.social_linkedin ?? "https://www.linkedin.com/company/is-studio-hu";
+  const facebook = content.social_facebook ?? "https://www.facebook.com/isstudiohu";
+  const instagram = content.social_instagram ?? "https://www.instagram.com/i_s_studio";
+
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -74,7 +75,7 @@ export default function ContactSection({ content }: { content: ContentMap }) {
               <div className="flex gap-6 flex-wrap">
                 {[
                   { href: linkedin, label: "LinkedIn" },
-                  { href: github, label: "GitHub" },
+                  { href: facebook, label: "Facebook" },
                   { href: instagram, label: "Instagram" },
                 ].map((s) => (
                   <a

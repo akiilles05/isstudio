@@ -9,11 +9,11 @@ const linkClasses = "text-[13px] text-muted transition-colors duration-200 hover
 const colLabelClasses = "text-[10.5px] text-accent tracking-[0.09em] uppercase font-medium mb-4";
 
 export default function FooterSection({ content }: { content: ContentMap }) {
-  const email = content.hero_email ?? "illes.akos@isstudio.hu";
+  const email = content.hero_email ?? "hello@isstudio.hu";
   const desc = content.footer_desc ?? "Skálázható digitális rendszerek tervezése és fejlesztése.";
   const linkedin = content.social_linkedin ?? "https://www.linkedin.com/company/is-studio-hu";
-  const facebook = content.social_facebook ?? "#";
-  const instagram = content.social_instagram ?? "#";
+  const facebook = content.social_facebook ?? "https://www.facebook.com/isstudiohu";
+  const instagram = content.social_instagram ?? "https://www.instagram.com/i_s_studio";
 
   return (
     <footer className="border-t border-navy/8 pt-16 pb-12 px-[clamp(24px,6vw,80px)]">
@@ -60,8 +60,8 @@ export default function FooterSection({ content }: { content: ContentMap }) {
               <div className="flex flex-col gap-2.5">
                 {[
                   { href: linkedin, label: "LinkedIn" },
-                  { href: instagram, label: "Instagram" },
                   { href: facebook, label: "Facebook" },
+                  { href: instagram, label: "Instagram" },
                 ].map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className={linkClasses}>
                     {s.label}
