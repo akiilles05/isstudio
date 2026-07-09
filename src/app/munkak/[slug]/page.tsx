@@ -42,6 +42,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const contentRows = await prisma.siteContent.findMany();
   const content = Object.fromEntries(contentRows.map((r) => [r.key, r.value]));
 
+  const externalUrl =
+    project.url && project.url !== "#"
+      ? /^https?:\/\//i.test(project.url)
+        ? project.url
+        : `https://${project.url}`
+      : null;
+
   return (
     <>
       <NavBar />
@@ -62,9 +69,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               {project.title}
             </h1>
 
-            {project.url && project.url !== "#" && (
+            {externalUrl && (
               <a
-                href={project.url}
+                href={externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[13.5px] text-white bg-accent px-[18px] py-2.5 rounded-lg font-medium mb-12"

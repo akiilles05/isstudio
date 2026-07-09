@@ -29,60 +29,25 @@ export default function AdminLoginPage() {
     setLoading(false);
   }
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    background: "rgba(13, 59, 102,0.08)",
-    border: "1px solid rgba(13, 59, 102,0.14)",
-    borderRadius: 8,
-    padding: "12px 16px",
-    color: "var(--color-ink)",
-    fontSize: 14,
-    outline: "none",
-  };
+  const inputClass =
+    "w-full bg-navy/8 border border-navy/14 rounded-lg py-3 px-4 text-ink text-sm outline-none";
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#ffffff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 24,
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 400,
-          background: "rgba(13, 59, 102,0.04)",
-          border: "1px solid rgba(13, 59, 102,0.12)",
-          borderRadius: 16,
-          padding: 40,
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
-            fontSize: 20,
-            fontWeight: 800,
-            color: "var(--color-navy)",
-            marginBottom: 8,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          I&S Studio<span style={{ color: "var(--color-accent)" }}>.</span>
+    <div className="dark scheme-dark min-h-screen flex items-center justify-center p-6 bg-bg text-ink">
+      <div className="w-full max-w-[400px] bg-navy/4 border border-navy/12 rounded-2xl p-10">
+        <p className="font-heading text-xl font-extrabold text-navy mb-2 tracking-[-0.03em]">
+          I&S Studio<span className="text-accent">.</span>
         </p>
-        <p style={{ fontSize: 13, color: "var(--color-muted)", marginBottom: 32 }}>Admin belépés</p>
+        <p className="text-[13px] text-muted mb-8">Admin belépés</p>
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={inputStyle}
+            className={inputClass}
           />
           <input
             type="password"
@@ -90,28 +55,13 @@ export default function AdminLoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            style={inputStyle}
+            className={inputClass}
           />
-          {error && <p style={{ fontSize: 13, color: "#f87171" }}>{error}</p>}
+          {error && <p className="text-[13px] text-red-400">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            style={{
-              background: "var(--color-accent)",
-              color: "#fff",
-              border: "none",
-              padding: "12px 24px",
-              borderRadius: 8,
-              fontSize: 14,
-              fontWeight: 500,
-              cursor: loading ? "not-allowed" : "pointer",
-              marginTop: 8,
-              opacity: loading ? 0.7 : 1,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 6,
-            }}
+            className="flex items-center justify-center gap-1.5 bg-accent text-white border-none py-3 px-6 rounded-lg text-sm font-medium mt-2 disabled:cursor-not-allowed disabled:opacity-70 cursor-pointer"
           >
             {loading ? "Belépés..." : (<>Belépés <ArrowRight size={14} strokeWidth={2} /></>)}
           </button>
