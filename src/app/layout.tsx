@@ -24,8 +24,8 @@ const siteUrl = "https://isstudio.hu";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "I&S Studio — Webfejlesztés Győr & Budapest",
-    template: "%s — I&S Studio",
+    default: "I&S Studio - Webfejlesztés Győr & Budapest",
+    template: "%s - I&S Studio",
   },
   description:
     "Modern, eredményorientált webfejlesztés magyar KKV-knak. Ahol az üzleti cél az első, a kód utána jön.",

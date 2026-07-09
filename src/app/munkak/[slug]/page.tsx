@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = await getProject(slug);
   if (!project) return {};
   return {
-    title: `${project.title} — I&S Studio`,
+    title: `${project.title} - I&S Studio`,
     description: project.subtitle,
     openGraph: {
       title: project.title,

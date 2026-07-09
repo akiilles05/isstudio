@@ -25,7 +25,7 @@ export default function AboutSection({ content }: { content: ContentMap }) {
     >
       <div className="max-w-[1280px] mx-auto" ref={ref}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          {/* Photos — staggered duo */}
+          {/* Photos - staggered duo */}
           <div className="flex gap-5 items-start max-w-[440px] mx-auto">
             <div
               className={`w-[52%] rounded-2xl overflow-hidden aspect-[3/4] relative border border-navy/10 shadow-[0_20px_50px_-24px_rgba(13,59,102,0.3)] transition-all duration-700 ease-out ${
@@ -35,7 +35,7 @@ export default function AboutSection({ content }: { content: ContentMap }) {
             >
               <img
                 src="/profile.png"
-                alt="Illés Ákos — alapító &amp; fejlesztő"
+                alt="Illés Ákos - alapító &amp; fejlesztő"
                 className="w-full h-full object-cover object-top block [filter:grayscale(12%)_contrast(1.04)] transition-transform duration-700 ease-out hover:scale-105"
               />
               <div
@@ -55,7 +55,7 @@ export default function AboutSection({ content }: { content: ContentMap }) {
             >
               <img
                 src="/nandor.jpg"
-                alt="Stecenkó Nándor — alapító &amp; fejlesztő"
+                alt="Stecenkó Nándor - alapító &amp; fejlesztő"
                 className="w-full h-full object-cover object-top block [filter:grayscale(12%)_contrast(1.04)] transition-transform duration-700 ease-out hover:scale-105"
               />
               <div

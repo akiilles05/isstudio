@@ -25,7 +25,7 @@
   --shadow-card-lg: 0 10px 30px rgba(13, 59, 102, 0.16);
 }
 
-/* Dark theme token overrides — .dark is set on <html>, or scoped to a subtree (e.g. admin) */
+/* Dark theme token overrides - .dark is set on <html>, or scoped to a subtree (e.g. admin) */
 html.dark,
 .dark {
   --color-bg: #0b1420;

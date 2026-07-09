@@ -231,7 +231,7 @@ export default function AdminBookingPage() {
                   </p>
                   {s.booked ? (
                     <p style={{ fontSize: 11.5, color: "#22c55e", marginTop: 2 }}>
-                      Foglalt — {s.name} ({s.email}){s.note ? ` · ${s.note}` : ""}
+                      Foglalt - {s.name} ({s.email}){s.note ? ` · ${s.note}` : ""}
                     </p>
                   ) : (
                     <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginTop: 2 }}>Szabad</p>

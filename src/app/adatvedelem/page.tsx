@@ -7,8 +7,8 @@ import { LegalContent } from "@/components/LegalPage";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Adatkezelési tájékoztató — I&S Studio",
-  description: "Adatvédelmi és adatkezelési tájékoztató — I&S Studio.",
+  title: "Adatkezelési tájékoztató - I&S Studio",
+  description: "Adatvédelmi és adatkezelési tájékoztató - I&S Studio.",
 };
 
 export default async function AdatvedelemPage() {
@@ -66,7 +66,7 @@ export default async function AdatvedelemPage() {
             {
               heading: "6. Harmadik felek, akikkel adatot osztunk meg",
               paragraphs: [],
-              list: ["Contabo GmbH — tárhelyszolgáltatás", "Google Analytics 4 — látogatottsági elemzés", "Meta Pixel — marketing mérés"],
+              list: ["Contabo GmbH - tárhelyszolgáltatás", "Google Analytics 4 - látogatottsági elemzés", "Meta Pixel - marketing mérés"],
             },
             {
               heading: "7. Adatmegőrzési idők",

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     sendMail(
       email,
-      "Foglalás megerősítve — I&S Studio",
+      "Foglalás megerősítve - I&S Studio",
       bookingConfirmationEmail({ name, dateFormatted: formatted, duration: slot.duration })
     ).catch(() => {});
 
@@ -35,12 +35,12 @@ export async function POST(req: NextRequest) {
     if (adminEmail && admin2Email) {
       sendMail(
         adminEmail,
-        `Új foglalás — ${name}`,
+        `Új foglalás - ${name}`,
         bookingAdminNotificationEmail({ name, email, note: note || null, dateFormatted: formatted, duration: slot.duration })
       ).catch(() => {});
       sendMail(
         admin2Email,
-        `Új foglalás — ${name}`,
+        `Új foglalás - ${name}`,
         bookingAdminNotificationEmail({ name, email, note: note || null, dateFormatted: formatted, duration: slot.duration })
       ).catch(() => {});
     }

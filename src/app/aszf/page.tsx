@@ -7,8 +7,8 @@ import { LegalContent } from "@/components/LegalPage";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "ÁSZF — I&S Studio",
-  description: "Általános Szerződési Feltételek — I&S Studio.",
+  title: "ÁSZF - I&S Studio",
+  description: "Általános Szerződési Feltételek - I&S Studio.",
 };
 
 export default async function ASZFPage() {

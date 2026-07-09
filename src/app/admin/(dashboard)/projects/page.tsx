@@ -133,7 +133,7 @@ export default function AdminProjectsPage() {
             ))}
             <div style={{ gridColumn: "1/-1" }}>
               <label style={{ fontSize: 12, color: "var(--color-muted)", display: "block", marginBottom: 6 }}>
-                Kép elérési útja (pl. /projects/fonalbaba.webp, opcionális — ha üres, a gradient mockup jelenik meg)
+                Kép elérési útja (pl. /projects/fonalbaba.webp, opcionális - ha üres, a gradient mockup jelenik meg)
               </label>
               <input
                 type="text"

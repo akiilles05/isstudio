@@ -18,7 +18,7 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
             Munkáink.
           </h2>
           <p className="text-[15px] text-muted max-w-[480px] leading-[1.7] mt-4">
-            Valódi projektek — azoknak a vállalkozásoknak, akikkel szívesen dolgozunk.
+            Valódi projektek - azoknak a vállalkozásoknak, akikkel szívesen dolgozunk.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
             ))}
           </div>
 
-          {/* Preview panel — hidden on mobile */}
+          {/* Preview panel - hidden on mobile */}
           {ap && (
             <div className="hidden md:flex sticky top-24 flex-col gap-4">
               <div

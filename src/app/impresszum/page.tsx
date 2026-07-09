@@ -7,8 +7,8 @@ import { LegalContent } from "@/components/LegalPage";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Impresszum — I&S Studio",
-  description: "Impresszum — I&S Studio.",
+  title: "Impresszum - I&S Studio",
+  description: "Impresszum - I&S Studio.",
 };
 
 export default async function ImpresszumPage() {
@@ -42,19 +42,19 @@ export default async function ImpresszumPage() {
             {
               heading: "Tevékenységi kör",
               paragraphs: ["Főtevékenység:"],
-              list: ["621001 — Számítógépes programozás m.n.s."],
+              list: ["621001 - Számítógépes programozás m.n.s."],
             },
             {
               heading: "Egyéb tevékenységek",
               paragraphs: [],
               list: [
-                "621002 — Egyedi szoftverfejlesztés",
-                "621003 — Rendszerszervezési, -karbantartási tanácsadás",
-                "621004 — Weblap tervezése (webdizájn)",
-                "622001 — Egyéb számítástechnikai szakértés, tanácsadás",
-                "622002 — Hardver-szaktanácsadás",
-                "622003 — Számítógép-üzemeltetés",
-                "731101 — Reklámtervezés, -készítés, -elhelyezés",
+                "621002 - Egyedi szoftverfejlesztés",
+                "621003 - Rendszerszervezési, -karbantartási tanácsadás",
+                "621004 - Weblap tervezése (webdizájn)",
+                "622001 - Egyéb számítástechnikai szakértés, tanácsadás",
+                "622002 - Hardver-szaktanácsadás",
+                "622003 - Számítógép-üzemeltetés",
+                "731101 - Reklámtervezés, -készítés, -elhelyezés",
               ],
             },
             {

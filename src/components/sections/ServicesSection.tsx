@@ -15,7 +15,7 @@ export default function ServicesSection({ services }: { services: Service[] }) {
             </h2>
           </div>
           <p className="text-sm text-muted max-w-[360px] leading-[1.7]">
-            Weboldaltól az automatizációig — minden, amire egy modern vállalkozásnak szüksége van.
+            Weboldaltól az automatizációig - minden, amire egy modern vállalkozásnak szüksége van.
           </p>
         </div>
 
