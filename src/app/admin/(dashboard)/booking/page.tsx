@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash2, Video } from "lucide-react";
 
 type BookingSlot = {
   id: number;
@@ -11,6 +11,7 @@ type BookingSlot = {
   name: string | null;
   email: string | null;
   note: string | null;
+  videoUrl: string | null;
 };
 
 const WEEKDAYS = ["H", "K", "Sze", "Cs", "P", "Szo", "V"];
@@ -237,15 +238,28 @@ export default function AdminBookingPage() {
                     <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginTop: 2 }}>Szabad</p>
                   )}
                 </div>
-                {!s.booked && (
-                  <button
-                    onClick={() => handleDelete(s.id)}
-                    aria-label="Törlés"
-                    style={{ background: "rgba(248,113,113,0.1)", color: "#f87171", border: "none", padding: 6, borderRadius: 6, cursor: "pointer", flexShrink: 0, display: "flex" }}
-                  >
-                    <Trash2 size={13} />
-                  </button>
-                )}
+                <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                  {s.booked && s.videoUrl && (
+                    <a
+                      href={s.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Videóhívás megnyitása"
+                      style={{ background: "rgba(76,124,248,0.12)", color: "var(--color-accent)", border: "none", padding: 6, borderRadius: 6, cursor: "pointer", display: "flex" }}
+                    >
+                      <Video size={13} />
+                    </a>
+                  )}
+                  {!s.booked && (
+                    <button
+                      onClick={() => handleDelete(s.id)}
+                      aria-label="Törlés"
+                      style={{ background: "rgba(248,113,113,0.1)", color: "#f87171", border: "none", padding: 6, borderRadius: 6, cursor: "pointer", display: "flex" }}
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>

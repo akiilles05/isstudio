@@ -12,6 +12,7 @@ import {
   HelpCircle,
   Clock,
   Mail,
+  Video,
   ArrowLeft,
   LogOut,
   type LucideIcon,
@@ -96,6 +97,25 @@ export default function AdminNav() {
       </nav>
 
       <div style={{ padding: "20px 12px 0" }}>
+        <Link
+          href="/videohivas"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "9px 12px",
+            borderRadius: 7,
+            fontSize: 13.5,
+            color: "var(--color-muted)",
+            textDecoration: "none",
+            marginBottom: 4,
+          }}
+        >
+          <Video size={15} strokeWidth={2} style={{ opacity: 0.65, flexShrink: 0 }} />
+          Videóhívás indítása
+        </Link>
         <Link
           href="/"
           style={{

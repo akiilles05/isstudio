@@ -36,6 +36,7 @@ export default function FooterSection({ content }: { content: ContentMap }) {
                   { href: "/#folyamat", label: "Folyamat" },
                   { href: "/#rolam", label: "Rólunk" },
                   { href: "/#kapcsolat", label: "Kapcsolat" },
+                  { href: "/videohivas", label: "Videóhívás" },
                 ].map((l) => (
                   <a key={l.href} href={l.href} className={linkClasses}>
                     {l.label}

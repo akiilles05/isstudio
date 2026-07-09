@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
+import { bookingRoomSlug, videoRoomUrl } from "@/lib/video-room";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +12,9 @@ export async function GET(req: NextRequest) {
     const session = await getAdminSession();
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     const slots = await prisma.bookingSlot.findMany({ orderBy: { date: "asc" } });
-    return NextResponse.json(slots);
+    return NextResponse.json(
+      slots.map((s) => ({ ...s, videoUrl: s.booked ? videoRoomUrl(bookingRoomSlug(s.id)) : null }))
+    );
   }
 
   const slots = await prisma.bookingSlot.findMany({

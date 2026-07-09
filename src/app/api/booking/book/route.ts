@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendMail } from "@/lib/mail";
 import { bookingConfirmationEmail, bookingAdminNotificationEmail } from "@/lib/email-templates";
+import { bookingRoomSlug, videoRoomUrl } from "@/lib/video-room";
 
 export const dynamic = "force-dynamic";
 
@@ -23,11 +24,12 @@ export async function POST(req: NextRequest) {
   const slot = await prisma.bookingSlot.findUnique({ where: { id } });
   if (slot) {
     const formatted = slot.date.toLocaleString("hu-HU", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Budapest" });
+    const videoUrl = videoRoomUrl(bookingRoomSlug(slot.id));
 
     sendMail(
       email,
       "Foglalás megerősítve - I&S Studio",
-      bookingConfirmationEmail({ name, dateFormatted: formatted, duration: slot.duration })
+      bookingConfirmationEmail({ name, dateFormatted: formatted, duration: slot.duration, videoUrl })
     ).catch(() => {});
 
     const adminEmail = process.env.ADMIN_NOTIFY_EMAIL;
@@ -36,12 +38,12 @@ export async function POST(req: NextRequest) {
       sendMail(
         adminEmail,
         `Új foglalás - ${name}`,
-        bookingAdminNotificationEmail({ name, email, note: note || null, dateFormatted: formatted, duration: slot.duration })
+        bookingAdminNotificationEmail({ name, email, note: note || null, dateFormatted: formatted, duration: slot.duration, videoUrl })
       ).catch(() => {});
       sendMail(
         admin2Email,
         `Új foglalás - ${name}`,
-        bookingAdminNotificationEmail({ name, email, note: note || null, dateFormatted: formatted, duration: slot.duration })
+        bookingAdminNotificationEmail({ name, email, note: note || null, dateFormatted: formatted, duration: slot.duration, videoUrl })
       ).catch(() => {});
     }
   }

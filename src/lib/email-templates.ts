@@ -60,8 +60,8 @@ function button(href: string, label: string) {
   </table>`;
 }
 
-export function bookingConfirmationEmail(params: { name: string; dateFormatted: string; duration: number }) {
-  const { name, dateFormatted, duration } = params;
+export function bookingConfirmationEmail(params: { name: string; dateFormatted: string; duration: number; videoUrl: string }) {
+  const { name, dateFormatted, duration, videoUrl } = params;
   return layout(`
     ${iconBadge("#22c55e", "rgba(34,197,94,0.1)", "rgba(34,197,94,0.28)", '<polyline points="20 6 9 17 4 12"></polyline>')}
     <p style="margin:0 0 4px 0;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4c7cf8;">Foglalás megerősítve</p>
@@ -75,14 +75,14 @@ export function bookingConfirmationEmail(params: { name: string; dateFormatted: 
           <p style="margin:0 0 6px 0;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#7080a8;">Időpont</p>
           <p style="margin:0 0 16px 0;font-size:17px;font-weight:700;color:#eef2ff;">${dateFormatted}</p>
           <p style="margin:0 0 6px 0;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#7080a8;">Időtartam</p>
-          <p style="margin:0;font-size:15px;color:#c0ccea;">${duration} perc &middot; Google Meet / telefon</p>
+          <p style="margin:0;font-size:15px;color:#c0ccea;">${duration} perc &middot; ingyenes videóhívás, időkorlát nélkül</p>
         </td>
       </tr>
     </table>
     <p style="margin:24px 0 0 0;font-size:14px;line-height:1.7;color:#7080a8;">
-      Hamarosan emailben jelentkezünk a hívás pontos részleteivel. Ha közben módosítanod kell, válaszolj erre a levélre.
+      A hívás időpontjában ezen a linken tudsz csatlakozni, nincs szükség regisztrációra vagy alkalmazás telepítésére. Ha közben módosítanod kell, válaszolj erre a levélre.
     </p>
-    ${button(SITE_URL, "Vissza a weboldalra")}
+    ${button(videoUrl, "Csatlakozás a videóhíváshoz")}
   `);
 }
 
@@ -92,8 +92,9 @@ export function bookingAdminNotificationEmail(params: {
   note: string | null;
   dateFormatted: string;
   duration: number;
+  videoUrl: string;
 }) {
-  const { name, email, note, dateFormatted, duration } = params;
+  const { name, email, note, dateFormatted, duration, videoUrl } = params;
   return layout(`
     ${iconBadge("#4c7cf8", "rgba(76,124,248,0.1)", "rgba(76,124,248,0.28)", '<rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 10h18"></path><path d="M8 2v4"></path><path d="M16 2v4"></path>')}
     <p style="margin:0 0 4px 0;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#22c55e;">Új foglalás</p>
@@ -106,6 +107,8 @@ export function bookingAdminNotificationEmail(params: {
           <p style="margin:0 0 6px 0;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#7080a8;">Kapcsolat</p>
           <p style="margin:0 0 16px 0;font-size:15px;color:#c0ccea;">${name} &middot; <a href="mailto:${email}" style="color:#90b0ff;">${email}</a></p>
           ${note ? `<p style="margin:0 0 6px 0;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#7080a8;">Megjegyzés</p><p style="margin:0;font-size:14px;line-height:1.6;color:#c0ccea;">${note}</p>` : ""}
+          <p style="margin:16px 0 6px 0;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#7080a8;">Videóhívás</p>
+          <p style="margin:0;font-size:14px;line-height:1.6;"><a href="${videoUrl}" style="color:#90b0ff;">${videoUrl}</a></p>
         </td>
       </tr>
     </table>
