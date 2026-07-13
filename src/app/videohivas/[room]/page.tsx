@@ -9,7 +9,7 @@ export default function VideoRoomPage({ params }: { params: Promise<{ room: stri
   const [joined, setJoined] = useState(false);
   const [name, setName] = useState("");
 
-  const jitsiSrc = `https://meet.jit.si/${encodeURIComponent(room)}#userInfo.displayName="${encodeURIComponent(
+  const jitsiSrc = `https://meet.isstudio.hu/${encodeURIComponent(room)}#userInfo.displayName="${encodeURIComponent(
     name || "Vendég"
   )}"&config.prejoinPageEnabled=false`;
 
