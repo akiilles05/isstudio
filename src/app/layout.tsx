@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Inter } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -88,6 +89,7 @@ export default function RootLayout({
       <body>
         {children}
         <CookieConsent />
+        <ScrollDepthTracker />
       </body>
     </html>
   );

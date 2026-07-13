@@ -27,6 +27,10 @@ export default function VideoRoomPage({ params }: { params: Promise<{ room: stri
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              window.gtag?.("event", "videohivas_join", {
+                event_category: "videohivas",
+                room,
+              });
               setJoined(true);
             }}
             className="w-full max-w-[380px] bg-white/[0.03] border border-white/[0.08] rounded-2xl p-10"

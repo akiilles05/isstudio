@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 const links = [
   { href: "/#munkak", label: "Munkáink", num: "01" },
@@ -58,6 +59,7 @@ export default function NavBar() {
 
         <a
           href="/#kapcsolat"
+          onClick={() => trackEvent("cta_click", { cta_location: "navbar_desktop" })}
           className="hidden md:flex items-center gap-1.5 bg-accent text-white px-5 py-2.5 rounded-[7px] text-[13.5px] font-medium whitespace-nowrap transition-colors duration-200 hover:bg-accent-dark"
         >
           Dolgozzunk együtt <ArrowRight size={15} />
@@ -89,7 +91,10 @@ export default function NavBar() {
           ))}
           <a
             href="/#kapcsolat"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => {
+              trackEvent("cta_click", { cta_location: "navbar_mobile" });
+              setMenuOpen(false);
+            }}
             className="bg-accent text-white px-8 py-[13px] rounded-lg text-[15px] font-medium mt-2 inline-flex items-center gap-1.5"
           >
             Dolgozzunk együtt <ArrowRight size={16} />

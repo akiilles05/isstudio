@@ -1,5 +1,8 @@
+"use client";
+
 import type { ContentMap } from "@/types";
 import { ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export default function HeroSection({ content }: { content: ContentMap }) {
   const email = content.hero_email ?? "illes.akos@isstudio.hu";
@@ -62,6 +65,7 @@ export default function HeroSection({ content }: { content: ContentMap }) {
           </a>
           <a
             href="#kapcsolat"
+            onClick={() => trackEvent("cta_click", { cta_location: "hero" })}
             className="inline-flex items-center gap-2 bg-accent text-white px-6 py-[13px] rounded-lg text-sm font-medium transition-colors duration-200 hover:bg-accent-dark"
           >
             Beszéljünk

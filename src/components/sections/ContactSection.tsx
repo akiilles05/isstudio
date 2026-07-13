@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import type { ContentMap } from "@/types";
+import { trackEvent } from "@/lib/analytics";
 
 const inputClasses =
   "w-full bg-navy/3 border border-navy/12 rounded-lg px-4 py-3.5 text-ink text-sm outline-none transition-[border-color,background] duration-200 focus:border-accent/50 focus:bg-accent/4";
@@ -39,8 +40,10 @@ export default function ContactSection({ content }: { content: ContentMap }) {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error("Hiba");
+      trackEvent("generate_lead", { form_id: "contact" });
       setSent(true);
     } catch {
+      trackEvent("contact_form_error", { form_id: "contact" });
       setError("Valami hiba történt, kérlek próbáld újra.");
     } finally {
       setLoading(false);
@@ -83,6 +86,7 @@ export default function ContactSection({ content }: { content: ContentMap }) {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent("outbound_click", { link_domain: s.label, link_url: s.href })}
                     className="text-[13px] text-muted transition-colors duration-200 hover:text-ink"
                   >
                     {s.label}

@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { ContentMap } from "@/types";
 import { openCookieSettings } from "@/lib/cookie-consent";
 import ThemeToggle from "@/components/ThemeToggle";
+import { trackEvent } from "@/lib/analytics";
 
 const linkClasses = "text-[13px] text-muted transition-colors duration-200 hover:text-ink";
 const colLabelClasses = "text-[10.5px] text-accent tracking-[0.09em] uppercase font-medium mb-4";
@@ -38,7 +39,14 @@ export default function FooterSection({ content }: { content: ContentMap }) {
                   { href: "/#kapcsolat", label: "Kapcsolat" },
                   { href: "/videohivas", label: "Videóhívás" },
                 ].map((l) => (
-                  <a key={l.href} href={l.href} className={linkClasses}>
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={() =>
+                      l.href === "/#kapcsolat" && trackEvent("cta_click", { cta_location: "footer_nav" })
+                    }
+                    className={linkClasses}
+                  >
                     {l.label}
                   </a>
                 ))}
@@ -50,7 +58,11 @@ export default function FooterSection({ content }: { content: ContentMap }) {
                 <a href={`mailto:${email}`} className={`${linkClasses} hover:text-accent`}>
                   {email}
                 </a>
-                <a href="https://isstudio.hu" className={linkClasses}>
+                <a
+                  href="https://isstudio.hu"
+                  onClick={() => trackEvent("outbound_click", { link_domain: "isstudio.hu", link_url: "https://isstudio.hu" })}
+                  className={linkClasses}
+                >
                   isstudio.hu
                 </a>
                 <p className="text-[13px] text-muted">Győr &amp; Budapest</p>
@@ -64,7 +76,14 @@ export default function FooterSection({ content }: { content: ContentMap }) {
                   { href: facebook, label: "Facebook" },
                   { href: instagram, label: "Instagram" },
                 ].map((s) => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className={linkClasses}>
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent("outbound_click", { link_domain: s.label, link_url: s.href })}
+                    className={linkClasses}
+                  >
                     {s.label}
                   </a>
                 ))}
