@@ -15,9 +15,44 @@ type BookingSlot = {
 };
 
 const WEEKDAYS = ["H", "K", "Sze", "Cs", "P", "Szo", "V"];
+const WEEKDAY_FULL = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat", "Vasárnap"];
 
 function dateKey(d: Date) {
   return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+}
+
+function toInputDate(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function generateSlotDates(opts: {
+  rangeStart: string;
+  rangeEnd: string;
+  weekdays: Set<number>; // 0=Monday..6=Sunday
+  startTime: string;
+  endTime: string;
+  interval: number;
+}): Date[] {
+  const [sy, sm, sd] = opts.rangeStart.split("-").map(Number);
+  const [ey, em, ed] = opts.rangeEnd.split("-").map(Number);
+  const [sh, smin] = opts.startTime.split(":").map(Number);
+  const [eh, emin] = opts.endTime.split(":").map(Number);
+
+  const rangeStart = new Date(sy, sm - 1, sd);
+  const rangeEnd = new Date(ey, em - 1, ed);
+  const dates: Date[] = [];
+
+  for (let day = new Date(rangeStart); day <= rangeEnd; day.setDate(day.getDate() + 1)) {
+    const weekdayIdx = (day.getDay() + 6) % 7;
+    if (!opts.weekdays.has(weekdayIdx)) continue;
+
+    const dayStart = new Date(day.getFullYear(), day.getMonth(), day.getDate(), sh, smin);
+    const dayEnd = new Date(day.getFullYear(), day.getMonth(), day.getDate(), eh, emin);
+    for (let t = new Date(dayStart); t < dayEnd; t.setMinutes(t.getMinutes() + opts.interval)) {
+      dates.push(new Date(t));
+    }
+  }
+  return dates;
 }
 
 export default function AdminBookingPage() {
@@ -31,6 +66,21 @@ export default function AdminBookingPage() {
   const [time, setTime] = useState("");
   const [duration, setDuration] = useState(30);
   const [saving, setSaving] = useState(false);
+
+  const [bulkOpen, setBulkOpen] = useState(false);
+  const [bulkStart, setBulkStart] = useState(() => toInputDate(new Date()));
+  const [bulkEnd, setBulkEnd] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 7);
+    return toInputDate(d);
+  });
+  const [bulkWeekdays, setBulkWeekdays] = useState<Set<number>>(new Set([0, 1, 2, 3, 4]));
+  const [bulkStartTime, setBulkStartTime] = useState("09:00");
+  const [bulkEndTime, setBulkEndTime] = useState("17:00");
+  const [bulkInterval, setBulkInterval] = useState(30);
+  const [bulkDuration, setBulkDuration] = useState(30);
+  const [bulkSaving, setBulkSaving] = useState(false);
+  const [bulkResult, setBulkResult] = useState<string>("");
 
   async function load() {
     setSlots(await fetch("/api/booking?all=true").then((r) => r.json()));
@@ -87,6 +137,41 @@ export default function AdminBookingPage() {
     setSaving(false);
   }
 
+  function toggleBulkWeekday(idx: number) {
+    setBulkWeekdays((prev) => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx);
+      else next.add(idx);
+      return next;
+    });
+  }
+
+  async function handleBulkGenerate() {
+    const dates = generateSlotDates({
+      rangeStart: bulkStart,
+      rangeEnd: bulkEnd,
+      weekdays: bulkWeekdays,
+      startTime: bulkStartTime,
+      endTime: bulkEndTime,
+      interval: bulkInterval,
+    });
+    if (dates.length === 0) {
+      setBulkResult("Nincs a szűrésnek megfelelő időpont.");
+      return;
+    }
+    setBulkSaving(true);
+    setBulkResult("");
+    const res = await fetch("/api/booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ dates: dates.map((d) => d.toISOString()), duration: bulkDuration }),
+    });
+    const data = await res.json();
+    setBulkResult(`${data.created} időpont létrehozva${data.skipped ? `, ${data.skipped} már létezett` : ""}.`);
+    await load();
+    setBulkSaving(false);
+  }
+
   async function handleDelete(id: number) {
     if (!confirm("Biztosan törlöd ezt az időpontot?")) return;
     await fetch("/api/booking", {
@@ -127,6 +212,93 @@ export default function AdminBookingPage() {
         <p style={{ fontSize: 13, color: "var(--color-muted)", marginTop: 4 }}>
           Válassz egy napot a naptárban, és nyiss meg rá időpontokat, amikre a látogatók foglalhatnak.
         </p>
+      </div>
+
+      <div style={{ background: "rgba(13, 59, 102,0.02)", border: "1px solid rgba(13, 59, 102,0.12)", borderRadius: 12, padding: 20, marginBottom: 16 }}>
+        <button
+          onClick={() => setBulkOpen((o) => !o)}
+          style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}
+        >
+          <p style={{ fontSize: 14, fontWeight: 600, color: "var(--color-navy)" }}>Több időpont egyszerre</p>
+          {bulkOpen ? <ChevronLeft size={15} style={{ transform: "rotate(-90deg)" }} /> : <ChevronRight size={15} style={{ transform: "rotate(90deg)" }} />}
+        </button>
+
+        {bulkOpen && (
+          <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <div>
+                <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 4 }}>Kezdő nap</p>
+                <input type="date" value={bulkStart} onChange={(e) => setBulkStart(e.target.value)} style={inputStyle} />
+              </div>
+              <div>
+                <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 4 }}>Utolsó nap</p>
+                <input type="date" value={bulkEnd} onChange={(e) => setBulkEnd(e.target.value)} style={inputStyle} />
+              </div>
+              <div>
+                <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 4 }}>Napi kezdés</p>
+                <input type="time" value={bulkStartTime} onChange={(e) => setBulkStartTime(e.target.value)} style={inputStyle} />
+              </div>
+              <div>
+                <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 4 }}>Napi zárás</p>
+                <input type="time" value={bulkEndTime} onChange={(e) => setBulkEndTime(e.target.value)} style={inputStyle} />
+              </div>
+              <div>
+                <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 4 }}>Időköz (perc)</p>
+                <input type="number" value={bulkInterval} onChange={(e) => setBulkInterval(Number(e.target.value))} style={{ ...inputStyle, width: 80 }} />
+              </div>
+              <div>
+                <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 4 }}>Időtartam (perc)</p>
+                <input type="number" value={bulkDuration} onChange={(e) => setBulkDuration(Number(e.target.value))} style={{ ...inputStyle, width: 80 }} />
+              </div>
+            </div>
+
+            <div>
+              <p style={{ fontSize: 11.5, color: "var(--color-muted)", marginBottom: 6 }}>Napok</p>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                {WEEKDAY_FULL.map((label, idx) => {
+                  const active = bulkWeekdays.has(idx);
+                  return (
+                    <button
+                      key={label}
+                      onClick={() => toggleBulkWeekday(idx)}
+                      style={{
+                        padding: "6px 12px",
+                        borderRadius: 6,
+                        fontSize: 12.5,
+                        cursor: "pointer",
+                        border: active ? "1px solid var(--color-accent)" : "1px solid rgba(13, 59, 102,0.15)",
+                        background: active ? "rgba(46,140,178,0.15)" : "transparent",
+                        color: active ? "var(--color-navy)" : "var(--color-muted)",
+                      }}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <button
+                onClick={handleBulkGenerate}
+                disabled={bulkSaving}
+                style={{
+                  background: "var(--color-accent)",
+                  color: "#fff",
+                  border: "none",
+                  padding: "10px 18px",
+                  borderRadius: 8,
+                  fontSize: 13,
+                  cursor: bulkSaving ? "not-allowed" : "pointer",
+                  opacity: bulkSaving ? 0.6 : 1,
+                }}
+              >
+                {bulkSaving ? "Generálás..." : "Időpontok generálása"}
+              </button>
+              {bulkResult && <p style={{ fontSize: 12.5, color: "var(--color-muted)" }}>{bulkResult}</p>}
+            </div>
+          </div>
+        )}
       </div>
 
       <div style={{ background: "rgba(13, 59, 102,0.02)", border: "1px solid rgba(13, 59, 102,0.12)", borderRadius: 12, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 320px" }}>

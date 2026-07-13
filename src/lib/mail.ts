@@ -10,12 +10,18 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendMail(to: string, subject: string, html: string) {
+export async function sendMail(
+  to: string,
+  subject: string,
+  html: string,
+  attachments?: { filename: string; content: string; contentType: string; method?: string }[]
+) {
   if (!process.env.SMTP_HOST) return;
   await transporter.sendMail({
     from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
     to,
     subject,
     html,
+    attachments,
   });
 }

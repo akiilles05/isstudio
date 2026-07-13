@@ -28,11 +28,31 @@ export async function POST(req: NextRequest) {
   const session = await getAdminSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { date, duration } = await req.json();
+  const body = await req.json();
+  const duration = body.duration || 30;
+
+  if (Array.isArray(body.dates)) {
+    if (body.dates.length === 0) return NextResponse.json({ error: "Nincs megadva dátum" }, { status: 400 });
+    const existing = await prisma.bookingSlot.findMany({
+      where: { date: { in: body.dates.map((d: string) => new Date(d)) } },
+      select: { date: true },
+    });
+    const existingTimes = new Set(existing.map((s) => s.date.getTime()));
+    const toCreate = (body.dates as string[])
+      .map((d) => new Date(d))
+      .filter((d) => !existingTimes.has(d.getTime()));
+
+    const result = await prisma.bookingSlot.createMany({
+      data: toCreate.map((date) => ({ date, duration })),
+    });
+    return NextResponse.json({ created: result.count, skipped: body.dates.length - toCreate.length });
+  }
+
+  const { date } = body;
   if (!date) return NextResponse.json({ error: "Hiányzó dátum" }, { status: 400 });
 
   const slot = await prisma.bookingSlot.create({
-    data: { date: new Date(date), duration: duration || 30 },
+    data: { date: new Date(date), duration },
   });
   return NextResponse.json(slot);
 }
