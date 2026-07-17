@@ -94,10 +94,10 @@ export default function FooterSection({ content }: { content: ContentMap }) {
               <div className="flex flex-col gap-2.5">
                 {[
                   { href: "/adatvedelem", label: "Adatvédelem" },
-                  { href: "/aszf", label: "ÁSZF" },
+                  { href: "/aszf", label: "ÁSZF", rel: "terms-of-service" },
                   { href: "/impresszum", label: "Impresszum" },
                 ].map((l) => (
-                  <a key={l.href} href={l.href} className={linkClasses}>
+                  <a key={l.href} href={l.href} rel={l.rel} className={linkClasses}>
                     {l.label}
                   </a>
                 ))}

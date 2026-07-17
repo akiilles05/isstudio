@@ -79,6 +79,7 @@ export default function RootLayout({
   return (
     <html lang="hu" className={`${montserrat.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
+        <link rel="terms-of-service" href="/aszf" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"

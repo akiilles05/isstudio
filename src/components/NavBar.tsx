@@ -68,6 +68,8 @@ export default function NavBar() {
         {/* Hamburger */}
         <button
           onClick={() => setMenuOpen((o) => !o)}
+          aria-label={menuOpen ? "Menü bezárása" : "Menü megnyitása"}
+          aria-expanded={menuOpen}
           className="md:hidden flex flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1"
         >
           <span className="w-[22px] h-0.5 bg-ink block rounded-[1px]" />

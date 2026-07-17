@@ -111,6 +111,7 @@ export default function CookieConsent() {
                 <button
                   role="switch"
                   aria-checked={draft[t.key]}
+                  aria-label={t.title}
                   onClick={() => setDraft((d) => ({ ...d, [t.key]: !d[t.key] }))}
                   className={`mt-0.5 flex-shrink-0 w-9 h-5 rounded-full relative transition-colors duration-200 cursor-pointer bg-transparent p-0 ${
                     draft[t.key] ? "bg-accent" : "bg-navy/16"
