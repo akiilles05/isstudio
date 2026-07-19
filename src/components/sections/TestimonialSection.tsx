@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Testimonial } from "@/types";
 
@@ -29,7 +30,13 @@ export default function TestimonialSection({ testimonials }: { testimonials: Tes
           </h2>
         </div>
 
-        <div className="max-w-[720px] mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-[720px] mx-auto text-center"
+        >
           <span className="font-heading text-[48px] font-extrabold text-accent/25 leading-none">
             &ldquo;
           </span>
@@ -71,7 +78,7 @@ export default function TestimonialSection({ testimonials }: { testimonials: Tes
               </button>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

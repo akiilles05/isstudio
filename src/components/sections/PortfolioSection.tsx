@@ -1,18 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/types";
+import { gsap } from "gsap";
 
 export default function PortfolioSection({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState(0);
   const ap = projects[active];
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = previewRef.current;
+    if (!el) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    function onMove(e: MouseEvent) {
+      const rect = el!.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      gsap.to(el, {
+        rotateX: py * -6,
+        rotateY: px * 8,
+        transformPerspective: 900,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    }
+    function onLeave() {
+      gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.6, ease: "power3.out" });
+    }
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
 
   return (
     <section id="munkak" className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,6vw,80px)]">
       <div className="max-w-[1280px] mx-auto">
-        <div className="mb-[72px]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-[72px]"
+        >
           <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Kiemelt munkák</p>
           <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05]">
             Munkáink.
@@ -20,9 +58,15 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
           <p className="text-[15px] text-muted max-w-[480px] leading-[1.7] mt-4">
             Valódi projektek - azoknak a vállalkozásoknak, akikkel szívesen dolgozunk.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start"
+        >
           {/* Project list */}
           <div className="flex flex-col gap-1.5">
             {projects.map((p, i) => (
@@ -70,8 +114,9 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
           {ap && (
             <div className="hidden md:flex sticky top-24 flex-col gap-4">
               <div
-                className="rounded-xl border border-navy/10 overflow-hidden relative transition-[background] duration-500 ease-in-out"
-                style={{ background: ap.previewBg }}
+                ref={previewRef}
+                className="rounded-xl border border-navy/10 overflow-hidden relative transition-[background] duration-500 ease-in-out will-change-transform"
+                style={{ background: ap.previewBg, transformStyle: "preserve-3d" }}
               >
                 {/* Browser chrome */}
                 <div className="flex items-center gap-1.5 px-4 py-[13px] border-b border-navy/10 bg-navy/6">
@@ -86,7 +131,12 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
                 {/* Preview content */}
                 {ap.image ? (
                   <div className="min-h-[320px] relative overflow-hidden">
-                    <img src={ap.image} alt={ap.title} className="w-full h-[320px] object-cover object-top block" />
+                    <img
+                      key={ap.id}
+                      src={ap.image}
+                      alt={ap.title}
+                      className="w-full h-[320px] object-cover object-top block animate-[clip-reveal_0.6s_ease-out]"
+                    />
                   </div>
                 ) : (
                   <div className="px-5 py-6 flex flex-col gap-2.5 min-h-[320px]">
@@ -126,7 +176,7 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
               )}
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

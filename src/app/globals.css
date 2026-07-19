@@ -6,6 +6,7 @@
 @theme {
   --font-heading: var(--font-montserrat), "Montserrat", sans-serif;
   --font-body: var(--font-inter), "Inter", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
 
   --color-bg: #ffffff;
   --color-navy: #0d3b66;
@@ -15,6 +16,14 @@
   --color-surface: #f2f2f2;
   --color-ink: #333333;
   --color-muted: #666666;
+
+  /* I&S Studio brand accent tokens (system-builder motif: nodes, signal lines) */
+  --color-steel: #132c47;
+  --color-steel-2: #1b3a5c;
+  --color-paper: #f4f1e8;
+  --color-slate: #8da0b5;
+  --color-amber: #e8963c;
+  --color-teal: #3e7c74;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -36,6 +45,13 @@ html.dark,
   --color-surface: #121b28;
   --color-ink: #dbe2ea;
   --color-muted: #8b97a7;
+
+  --color-steel: #0b1c30;
+  --color-steel-2: #132c47;
+  --color-paper: #f4f1e8;
+  --color-slate: #8da0b5;
+  --color-amber: #e8963c;
+  --color-teal: #4a9a8f;
 }
 
 @layer base {
@@ -100,4 +116,23 @@ html.dark,
 @keyframes scroll-cue {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(200%); }
+}
+
+@keyframes clip-reveal {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes float-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

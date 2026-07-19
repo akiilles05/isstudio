@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { motion } from "framer-motion";
 import type { Service } from "@/types";
 
 export default function ServicesSection({ services }: { services: Service[] }) {
@@ -7,7 +11,13 @@ export default function ServicesSection({ services }: { services: Service[] }) {
       className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,6vw,80px)] bg-navy/3 border-t border-b border-navy/8"
     >
       <div className="max-w-[1280px] mx-auto">
-        <div className="flex justify-between items-end flex-wrap gap-6 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex justify-between items-end flex-wrap gap-6 mb-16"
+        >
           <div>
             <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Amit kapsz</p>
             <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05]">
@@ -17,9 +27,15 @@ export default function ServicesSection({ services }: { services: Service[] }) {
           <p className="text-sm text-muted max-w-[360px] leading-[1.7]">
             Weboldaltól az automatizációig - minden, amire egy modern vállalkozásnak szüksége van.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-navy/10 rounded-xl overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-navy/10 rounded-xl overflow-hidden"
+        >
           {services.map((svc, i) => {
             const col = i % 2;
             const row = Math.floor(i / 2);
@@ -33,7 +49,7 @@ export default function ServicesSection({ services }: { services: Service[] }) {
               />
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -48,9 +64,25 @@ function ServiceCard({
   borderRight: boolean;
   borderBottom: boolean;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    cardRef.current!.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    cardRef.current!.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  }
+
   return (
     <div
-      className={`px-8 py-9 transition-colors duration-200 ease-in-out hover:bg-accent/4 ${
+      ref={cardRef}
+      onMouseMove={onMouseMove}
+      style={{
+        backgroundImage:
+          "radial-gradient(320px circle at var(--mx, -999px) var(--my, -999px), rgba(232, 150, 60, 0.08), transparent 70%)",
+      }}
+      className={`relative px-8 py-9 transition-colors duration-200 ease-in-out hover:bg-accent/4 ${
         borderRight ? "border-r border-navy/10" : ""
       } ${borderBottom ? "border-b border-navy/10" : ""}`}
     >

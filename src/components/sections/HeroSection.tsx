@@ -10,11 +10,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HeroScene = dynamic(() => import("@/components/three/HeroScene"), { ssr: false });
+const NodeGraphCanvas = dynamic(() => import("@/components/NodeGraphCanvas"), { ssr: false });
 
 export default function HeroSection({ content }: { content: ContentMap }) {
   const email = content.hero_email ?? "illes.akos@isstudio.hu";
-  const tag = content.hero_tag ?? "Webfejlesztés · Győr & Budapest";
+  const tag = content.hero_tag ?? "rendszerépítő partner, nem ügynökség";
   const desc = content.hero_desc ?? "Modern, eredményorientált webfejlesztés magyar KKV-knak.";
 
   const rootRef = useRef<HTMLElement>(null);
@@ -79,16 +79,20 @@ export default function HeroSection({ content }: { content: ContentMap }) {
           });
         });
 
-      // Scroll-linked parallax: content drifts up and fades as the hero
-      // scrolls out, echoing the three.js scene's own scroll response.
+      // Depth-layered parallax: each layer drifts at its own speed as the
+      // hero scrolls out (depth-0 barely moves, depth-4/text moves fastest).
       ScrollTrigger.create({
         trigger: rootRef.current,
         start: "top top",
         end: "bottom top",
         scrub: true,
         onUpdate: (self) => {
-          gsap.set(".hero-content", { y: self.progress * -80, opacity: 1 - self.progress * 1.1 });
-          gsap.set(".hero-topbar", { y: self.progress * -30, opacity: 1 - self.progress * 1.4 });
+          const p = self.progress;
+          gsap.set(".hero-depth-0", { y: p * -20, opacity: 1 - p * 0.6 });
+          gsap.set(".hero-depth-1", { y: p * -45 });
+          gsap.set(".hero-depth-2", { y: p * -70, opacity: 1 - p * 0.9 });
+          gsap.set(".hero-content", { y: p * -110, opacity: 1 - p * 1.1 });
+          gsap.set(".hero-topbar", { y: p * -30, opacity: 1 - p * 1.4 });
         },
       });
     }, rootRef);
@@ -130,15 +134,26 @@ export default function HeroSection({ content }: { content: ContentMap }) {
       id="top"
       className="min-h-screen flex flex-col justify-end relative overflow-hidden pb-20 px-[clamp(24px,6vw,80px)]"
     >
-      {/* three.js node network */}
-      <HeroScene />
-
-      {/* Radial gradient */}
+      {/* Depth 0: far background radial gradient — slowest layer */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
+        className="hero-depth-0 absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse 90% 55% at 15% -5%, rgba(from var(--color-accent) r g b / 0.18) 0%, transparent 65%)" }}
       />
+
+      {/* Depth 1: amber glow atmosphere, blended additively */}
+      <div
+        aria-hidden="true"
+        className="hero-depth-1 absolute -top-[10%] right-[8%] w-[46vw] h-[46vw] max-w-[560px] max-h-[560px] rounded-full pointer-events-none [mix-blend-mode:screen] motion-safe:animate-[float-breathe_12s_ease-in-out_infinite]"
+        style={{ background: "radial-gradient(circle, var(--color-amber) 0%, transparent 70%)", filter: "blur(90px)", opacity: 0.35 }}
+      />
+
+      {/* Depth 2: canvas node graph, mid-speed — confined to the right side
+          so it never runs into the headline/CTA column on the left */}
+      <div className="hero-depth-2 absolute inset-y-0 right-0 left-[38%] z-0 pointer-events-none">
+        <NodeGraphCanvas />
+      </div>
+
       {/* Bottom fade */}
       <div
         aria-hidden="true"
@@ -159,14 +174,14 @@ export default function HeroSection({ content }: { content: ContentMap }) {
 
       {/* Main content */}
       <div className="hero-content relative z-[1] max-w-[1200px]">
-        <p className="hero-tag text-[11.5px] font-medium text-accent tracking-[0.11em] uppercase mb-7">{tag}</p>
+        <p className="hero-tag font-mono text-[11.5px] font-medium text-accent tracking-[0.11em] lowercase mb-7">{tag}</p>
         <h1 className="font-heading text-[clamp(2.7rem,5.5vw,5.8rem)] font-extrabold leading-[1.0] tracking-[-0.04em] text-navy mb-9">
           <span className="hero-line block">
-            <span ref={line1Ref}>Weboldal, ami</span>
+            <span ref={line1Ref}>Nem weboldalt építünk.</span>
           </span>
           <span className="hero-line block">
             <span ref={line2Ref}>
-              dolgozik <span className="text-accent">helyetted.</span>
+              <span className="text-amber font-[900]">Rendszert.</span>
             </span>
           </span>
         </h1>

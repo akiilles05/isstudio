@@ -1,13 +1,21 @@
 "use client";
 
+import { motion } from "framer-motion";
 import type { ContentMap } from "@/types";
-import { useInView } from "@/hooks/useInView";
 
 const skills = ["Webfejlesztés", "Webdesign", "SEO", "Automatizálás", "Pénzügy"];
 
-export default function AboutSection({ content }: { content: ContentMap }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
 
+const item = {
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
+};
+
+export default function AboutSection({ content }: { content: ContentMap }) {
   const title = content.about_title ?? "Két fejlesztő, egy cél.";
   const p1 = content.about_p1 ?? "";
   const p2 = content.about_p2 ?? "";
@@ -23,15 +31,19 @@ export default function AboutSection({ content }: { content: ContentMap }) {
       id="rolam"
       className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,6vw,80px)] bg-navy/3 border-t border-b border-navy/8"
     >
-      <div className="max-w-[1280px] mx-auto" ref={ref}>
+      <motion.div
+        className="max-w-[1280px] mx-auto"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           {/* Photos - staggered duo */}
           <div className="flex gap-5 items-start max-w-[440px] mx-auto">
-            <div
-              className={`w-[52%] rounded-2xl overflow-hidden aspect-[3/4] relative border border-navy/10 shadow-[0_20px_50px_-24px_rgba(13,59,102,0.3)] transition-all duration-700 ease-out ${
-                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: "0ms" }}
+            <motion.div
+              variants={item}
+              className="w-[52%] rounded-2xl overflow-hidden aspect-[3/4] relative border border-navy/10 shadow-[0_20px_50px_-24px_rgba(13,59,102,0.3)]"
             >
               <img
                 src="/profile.png"
@@ -46,12 +58,10 @@ export default function AboutSection({ content }: { content: ContentMap }) {
                 <p className="font-heading text-xs font-bold text-white tracking-[-0.01em]">Illés Ákos</p>
                 <p className="text-[10px] text-white mt-[3px]">Alapító &amp; fejlesztő</p>
               </div>
-            </div>
-            <div
-              className={`w-[48%] mt-10 rounded-2xl overflow-hidden aspect-[3/4] relative border border-navy/10 shadow-[0_20px_50px_-24px_rgba(13,59,102,0.3)] transition-all duration-700 ease-out ${
-                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: "150ms" }}
+            </motion.div>
+            <motion.div
+              variants={item}
+              className="w-[48%] mt-10 rounded-2xl overflow-hidden aspect-[3/4] relative border border-navy/10 shadow-[0_20px_50px_-24px_rgba(13,59,102,0.3)]"
             >
               <img
                 src="/nandor.jpg"
@@ -66,16 +76,11 @@ export default function AboutSection({ content }: { content: ContentMap }) {
                 <p className="font-heading text-xs font-bold text-white tracking-[-0.01em]">Stecenkó Nándor</p>
                 <p className="text-[10px]  mt-[3px] text-white">Alapító &amp; fejlesztő</p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Text */}
-          <div
-            className={`transition-all duration-700 ease-out ${
-              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-            style={{ transitionDelay: "250ms" }}
-          >
+          <motion.div variants={item}>
             <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Rólunk</p>
             <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.08] mb-7">
               {title}
@@ -92,10 +97,7 @@ export default function AboutSection({ content }: { content: ContentMap }) {
               ].map((s, i) => (
                 <div
                   key={i}
-                  className={`px-4 py-6 text-center transition-all duration-500 ease-out ${
-                    s.border ? "border-l border-r border-navy/10" : ""
-                  } ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-                  style={{ transitionDelay: `${400 + i * 100}ms` }}
+                  className={`px-4 py-6 text-center ${s.border ? "border-l border-r border-navy/10" : ""}`}
                 >
                   <p className="font-heading text-[2.5rem] font-extrabold text-accent tracking-[-0.04em] leading-none">
                     {s.val}
@@ -107,21 +109,18 @@ export default function AboutSection({ content }: { content: ContentMap }) {
 
             {/* Skill tags */}
             <div className="flex gap-2 flex-wrap">
-              {skills.map((sk, i) => (
+              {skills.map((sk) => (
                 <span
                   key={sk}
-                  className={`px-[15px] py-[7px] border border-accent/22 rounded-full text-xs text-muted bg-accent/4 transition-all duration-500 ease-out ${
-                    inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-                  }`}
-                  style={{ transitionDelay: `${700 + i * 60}ms` }}
+                  className="px-[15px] py-[7px] border border-accent/22 rounded-full text-xs text-muted bg-accent/4"
                 >
                   {sk}
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import type { ContentMap } from "@/types";
 import { trackEvent } from "@/lib/analytics";
@@ -61,7 +62,13 @@ export default function ContactSection({ content }: { content: ContentMap }) {
           <p className="text-[15px] text-muted max-w-[460px] leading-[1.72] mt-4">{desc}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-20 items-start"
+        >
           {/* Left info */}
           <div className="flex flex-col gap-10">
             <div>
@@ -146,7 +153,7 @@ export default function ContactSection({ content }: { content: ContentMap }) {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

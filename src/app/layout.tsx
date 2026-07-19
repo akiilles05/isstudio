@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import { Montserrat, Inter, JetBrains_Mono } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
+import CustomCursor from "@/components/CustomCursor";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import { themeInitScript } from "@/lib/theme";
@@ -17,6 +18,13 @@ const inter = Inter({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -77,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="hu" className={`${montserrat.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="hu" className={`${montserrat.variable} ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <link rel="terms-of-service" href="/aszf" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
@@ -89,6 +97,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <CustomCursor />
         <CookieConsent />
         <ScrollDepthTracker />
       </body>

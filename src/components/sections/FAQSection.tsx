@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import type { FAQ } from "@/types";
 
 export default function FAQSection({ faqs }: { faqs: FAQ[] }) {
@@ -18,7 +19,13 @@ export default function FAQSection({ faqs }: { faqs: FAQ[] }) {
           </h2>
         </div>
 
-        <div className="flex flex-col border border-navy/10 rounded-xl overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col border border-navy/10 rounded-xl overflow-hidden"
+        >
           {faqs.map((f, i) => {
             const open = openId === f.id;
             return (
@@ -42,11 +49,24 @@ export default function FAQSection({ faqs }: { faqs: FAQ[] }) {
                     +
                   </span>
                 </button>
-                {open && <p className="px-6 pb-6 text-sm text-muted leading-[1.72]">{f.answer}</p>}
+                <AnimatePresence initial={false}>
+                  {open && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 pb-6 text-sm text-muted leading-[1.72]">{f.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
