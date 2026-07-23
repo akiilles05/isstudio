@@ -192,7 +192,7 @@ export default function HeroSection({ content }: { content: ContentMap }) {
             data-magnetic
             className="hero-cta inline-flex items-center gap-2 border border-navy/16 text-ink px-6 py-[13px] rounded-lg text-sm font-medium transition-colors duration-200 hover:border-navy/35 hover:text-navy"
           >
-            Korábbi munkák <ArrowRight size={15} />
+            Korábbi munkáink <ArrowRight size={15} />
           </a>
           <a
             href="#kapcsolat"
@@ -200,7 +200,7 @@ export default function HeroSection({ content }: { content: ContentMap }) {
             onClick={() => trackEvent("cta_click", { cta_location: "hero" })}
             className="hero-cta inline-flex items-center gap-2 bg-accent text-white px-6 py-[13px] rounded-lg text-sm font-medium transition-colors duration-200 hover:bg-accent-dark"
           >
-            Beszéljünk
+            Elérhetőségeink
           </a>
         </div>
       </div>

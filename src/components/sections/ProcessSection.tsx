@@ -14,11 +14,11 @@ export default function ProcessSection({ steps }: { steps: ProcessStep[] }) {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-[72px]"
         >
-          <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Hogyan dolgozunk</p>
+          <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Munkafolyamat</p>
           <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05]">
             Az első üdvözléstől
             <br />
-            az élő weboldalig.
+            az élő weboldalig
           </h2>
         </motion.div>
 

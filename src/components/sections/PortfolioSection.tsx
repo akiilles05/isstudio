@@ -53,10 +53,10 @@ export default function PortfolioSection({ projects }: { projects: Project[] }) 
         >
           <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Kiemelt munkák</p>
           <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05]">
-            Munkáink.
+            Munkáink
           </h2>
           <p className="text-[15px] text-muted max-w-[480px] leading-[1.7] mt-4">
-            Valódi projektek - azoknak a vállalkozásoknak, akikkel szívesen dolgozunk.
+            Válogatás azokból a projektekből, amikre büszkék vagyunk.
           </p>
         </motion.div>
 

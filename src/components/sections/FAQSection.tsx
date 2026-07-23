@@ -13,9 +13,8 @@ export default function FAQSection({ faqs }: { faqs: FAQ[] }) {
     <section className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,6vw,80px)]">
       <div className="max-w-[860px] mx-auto">
         <div className="mb-14 text-center">
-          <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Gyakori kérdések</p>
           <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05]">
-            Kérdésed van?
+            Gyakori kérdések
           </h2>
         </div>
 

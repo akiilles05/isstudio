@@ -26,7 +26,7 @@ export default function TestimonialSection({ testimonials }: { testimonials: Tes
         <div className="mb-16">
           <p className="text-[11px] font-medium text-accent tracking-[0.1em] uppercase mb-4">Ügyfélvélemények</p>
           <h2 className="font-heading text-[clamp(2rem,3.8vw,3.8rem)] font-extrabold tracking-[-0.04em] text-navy leading-[1.05]">
-            Amit rólam mondanak.
+            Amit rólunk mondanak
           </h2>
         </div>
 
