@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const NodeGraphCanvas = dynamic(() => import("@/components/NodeGraphCanvas"), { ssr: false });
 
 export default function HeroSection({ content }: { content: ContentMap }) {
-  const email = content.hero_email ?? "illes.akos@isstudio.hu";
+  const email = content.hero_email ?? "hello@isstudio.hu";
   const tag = content.hero_tag ?? "rendszerépítő partner, nem ügynökség";
   const desc = content.hero_desc ?? "Modern, eredményorientált webfejlesztés magyar KKV-knak.";
 
